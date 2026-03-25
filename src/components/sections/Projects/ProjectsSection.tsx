@@ -82,7 +82,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
-        aspectRatio: project.featured ? "16/9" : "4/3",
+        aspectRatio: "16/9",
       }}
     >
       {/* Imagen placeholder con gradiente */}

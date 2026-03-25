@@ -103,10 +103,10 @@ export function HeroSection() {
           </div>
 
           {/* Heading con perspectiva */}
-          <div style={{ perspective: "1200px" }}>
+          <div style={{ perspective: "1200px" }} className="w-full overflow-hidden px-2">
             <h1
               ref={headingRef}
-              className="font-bold tracking-tight leading-none mb-8"
+              className="font-bold tracking-tight leading-none mb-6 md:mb-8 break-words"
               style={{ fontSize: "var(--font-size-hero)" }}
             >
               <span className="hero-word block opacity-0">
@@ -124,9 +124,9 @@ export function HeroSection() {
           {/* Subheading */}
           <p
             ref={subRef}
-            className="opacity-0 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="opacity-0 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed px-2"
             style={{
-              fontSize: "var(--font-size-lg)",
+              fontSize: "var(--font-size-base)",
               color: "var(--color-text-muted)",
             }}
           >
@@ -137,18 +137,18 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div
             ref={ctaRef}
-            className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0"
           >
             <motion.a
               href="#proyectos"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="relative px-8 py-4 rounded-full font-semibold text-white overflow-hidden group"
+              className="relative w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-white overflow-hidden group text-center text-sm md:text-base"
               style={{ background: "var(--gradient-primary)" }}
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center justify-center gap-2">
                 Ver proyectos
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </span>
@@ -162,7 +162,7 @@ export function HeroSection() {
               href="#contacto"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="gradient-border px-8 py-4 rounded-full font-semibold"
+              className="gradient-border w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-center text-sm md:text-base"
               style={{
                 background: "transparent",
                 color: "var(--color-text)",
@@ -177,7 +177,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.8 }}
-            className="flex flex-wrap justify-center gap-8 mt-16 pt-10"
+            className="flex flex-wrap justify-center gap-6 md:gap-10 mt-12 md:mt-16 pt-8 md:pt-10 w-full"
             style={{ borderTop: "1px solid var(--color-border)" }}
           >
             {[
@@ -186,9 +186,7 @@ export function HeroSection() {
               { value: "5+", label: "Años de experiencia" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div
-                  className="text-2xl font-bold gradient-text"
-                >
+                <div className="text-xl md:text-2xl font-bold gradient-text">
                   {stat.value}
                 </div>
                 <div

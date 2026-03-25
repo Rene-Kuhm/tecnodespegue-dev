@@ -76,7 +76,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         ease: [0.16, 1, 0.3, 1],
       }}
       whileHover={{ y: -6, scale: 1.01 }}
-      className="group relative p-8 rounded-2xl cursor-pointer"
+      className="group relative p-5 sm:p-6 md:p-8 rounded-2xl cursor-pointer"
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
@@ -99,7 +99,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
       {/* Icon */}
       <div
-        className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6"
+        className="w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6"
         style={{
           background: `${service.color}18`,
           border: `1px solid ${service.color}30`,
@@ -110,13 +110,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
       {/* Content */}
       <h3
-        className="text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-white"
+        className="text-lg md:text-xl font-bold mb-2 md:mb-3 transition-colors duration-300 group-hover:text-white"
         style={{ color: "var(--color-text)" }}
       >
         {service.title}
       </h3>
       <p
-        className="text-sm leading-relaxed mb-6"
+        className="text-sm leading-relaxed mb-4 md:mb-6"
         style={{ color: "var(--color-text-muted)" }}
       >
         {service.description}

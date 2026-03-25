@@ -134,7 +134,7 @@ export function ContactSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto">
           {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -144,7 +144,7 @@ export function ContactSection() {
             className="lg:col-span-2 flex flex-col gap-6"
           >
             <div
-              className="p-8 rounded-2xl flex-1"
+              className="p-5 md:p-8 rounded-2xl flex-1"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
@@ -208,7 +208,7 @@ export function ContactSection() {
             className="lg:col-span-3"
           >
             <div
-              className="p-8 rounded-2xl h-full"
+              className="p-5 md:p-8 rounded-2xl h-full"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
@@ -227,7 +227,7 @@ export function ContactSection() {
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
                       <label style={labelStyles}>Nombre *</label>

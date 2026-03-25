@@ -76,7 +76,7 @@ export function AboutSection() {
       style={{ background: "var(--color-bg)" }}
     >
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
           {/* Left — Visual decorativo */}
           <div className="relative order-2 lg:order-1">
             <div
@@ -168,7 +168,7 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -top-6 -right-6 glass rounded-2xl p-5 hidden lg:block"
+              className="absolute -top-4 -right-4 glass rounded-2xl p-4 hidden lg:block"
             >
               <div className="text-2xl font-black gradient-text">+50</div>
               <div className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
@@ -222,7 +222,7 @@ export function AboutSection() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
               {STATS.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -230,7 +230,7 @@ export function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-5 rounded-xl"
+                  className="p-4 md:p-5 rounded-xl"
                   style={{
                     background: "var(--color-surface)",
                     border: "1px solid var(--color-border)",
