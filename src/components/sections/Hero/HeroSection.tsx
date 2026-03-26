@@ -143,7 +143,7 @@ export function HeroSection() {
         <div className="hero-content max-w-5xl mx-auto text-center">
 
           {/* Badge */}
-          <div ref={badgeRef} className="inline-flex mb-8 opacity-0">
+          <div ref={badgeRef} className="flex justify-center mb-7 opacity-0">
             <span className="chip glass" style={{ color: "var(--color-primary-light)" }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse-glow flex-shrink-0"
                 style={{ background: "var(--color-secondary)" }} />
@@ -186,25 +186,25 @@ export function HeroSection() {
           {/* CTAs */}
           <div
             ref={ctaRef}
-            className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0"
+            className="opacity-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full max-w-sm sm:max-w-none mx-auto"
           >
             <motion.a
               href="#proyectos"
-              whileHover={{ scale: 1.03, y: -2 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-primary w-full sm:w-auto"
+              className="btn-primary justify-center"
             >
               Ver proyectos
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </motion.a>
 
             <motion.a
               href="#contacto"
-              whileHover={{ scale: 1.03, y: -2 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-outline w-full sm:w-auto"
+              className="btn-outline justify-center"
             >
               Hablemos de tu proyecto
             </motion.a>

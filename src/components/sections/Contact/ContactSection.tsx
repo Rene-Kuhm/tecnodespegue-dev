@@ -43,7 +43,7 @@ export function ContactSection() {
   };
 
   const fieldClass = (name: string) =>
-    `input-field ${focused === name ? "focused" : ""}`;
+    `input-field${focused === name ? " focused" : ""}`;
 
   return (
     <section id="contacto" className="section relative overflow-hidden" style={{ background: "var(--color-bg-secondary)" }}>
@@ -166,17 +166,17 @@ export function ContactSection() {
                   </motion.button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
+                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
                       <input type="text" name="name" required value={formData.name} onChange={handleChange}
                         placeholder="Tu nombre completo"
                         onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
                         className={fieldClass("name")} />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Email *</label>
+                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Email *</label>
                       <input type="email" name="email" required value={formData.email} onChange={handleChange}
                         placeholder="tu@email.com"
                         onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
@@ -184,19 +184,19 @@ export function ContactSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
+                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
                       <input type="text" name="company" value={formData.company} onChange={handleChange}
                         placeholder="Tu empresa (opcional)"
                         onFocus={() => setFocused("company")} onBlur={() => setFocused(null)}
                         className={fieldClass("company")} />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
+                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
                       <select name="service" value={formData.service} onChange={handleChange}
                         onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
-                        className={fieldClass("service")} style={{ cursor: "pointer" }}>
+                        className={fieldClass("service")}>
                         <option value="">Seleccionar...</option>
                         {SERVICES_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
@@ -204,17 +204,17 @@ export function ContactSection() {
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
+                    <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
                     <select name="budget" value={formData.budget} onChange={handleChange}
                       onFocus={() => setFocused("budget")} onBlur={() => setFocused(null)}
-                      className={fieldClass("budget")} style={{ cursor: "pointer" }}>
+                      className={fieldClass("budget")}>
                       <option value="">Seleccionar rango...</option>
                       {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
                     </select>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
+                    <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
                     <textarea name="message" required rows={4} value={formData.message} onChange={handleChange}
                       placeholder="Contanos sobre tu proyecto, objetivos y timeline..."
                       onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
@@ -224,9 +224,9 @@ export function ContactSection() {
                   <motion.button
                     type="submit"
                     disabled={sending}
-                    whileHover={!sending ? { scale: 1.02, y: -2 } : {}}
-                    whileTap={!sending ? { scale: 0.97 } : {}}
-                    className="btn-primary mt-1 w-full py-4"
+                    whileHover={!sending ? { scale: 1.01, y: -1 } : {}}
+                    whileTap={!sending ? { scale: 0.98 } : {}}
+                    className="btn-primary w-full mt-2"
                     style={{ opacity: sending ? 0.7 : 1, cursor: sending ? "not-allowed" : "pointer" }}
                   >
                     {sending ? (

@@ -66,7 +66,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -8, scale: 1.01 }}
-      className="group relative p-6 md:p-7 rounded-2xl cursor-pointer overflow-hidden shimmer"
+      className="group relative p-6 md:p-7 rounded-2xl cursor-pointer overflow-hidden shimmer flex flex-col h-full"
       style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
     >
       {/* Número de fondo decorativo */}
@@ -107,7 +107,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         {service.title}
       </h3>
 
-      <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-muted)" }}>
+      <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "var(--color-text-muted)" }}>
         {service.description}
       </p>
 
@@ -178,7 +178,7 @@ export function ServicesSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
           {SERVICES.map((s, i) => <ServiceCard key={s.id} service={s} index={i} />)}
         </div>
       </div>

@@ -120,15 +120,9 @@ export function Header() {
           </ul>
 
           {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="#contacto"
-              className="relative px-5 py-2.5 rounded-full text-sm font-semibold text-white overflow-hidden group"
-              style={{ background: "var(--gradient-primary)" }}
-            >
-              <span className="relative z-10">Hablemos</span>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: "var(--color-primary-light)" }} />
+          <div className="hidden md:flex items-center">
+            <Link href="#contacto" className="btn-primary text-sm">
+              Hablemos
             </Link>
           </div>
 

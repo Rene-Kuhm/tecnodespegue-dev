@@ -83,6 +83,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
         aspectRatio: "16/9",
+        minHeight: "200px",
       }}
     >
       {/* Imagen placeholder con gradiente */}
@@ -106,25 +107,25 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       {/* Número del proyecto */}
       <div
-        className="absolute top-6 left-6 text-5xl font-black opacity-10"
-        style={{ color: "white" }}
+        className="absolute top-4 left-5 text-4xl font-black opacity-10 select-none"
+        style={{ color: "white", lineHeight: 1 }}
       >
         {project.id}
       </div>
 
       {/* Featured badge */}
       {project.featured && (
-        <div className="absolute top-6 right-6">
+        <div className="absolute top-4 right-4">
           <span
-            className="text-xs font-semibold px-3 py-1 rounded-full"
+            className="text-xs font-semibold px-2.5 py-1 rounded-full"
             style={{
-              background: "rgba(108, 99, 255, 0.3)",
+              background: "rgba(124, 111, 255, 0.25)",
               color: "var(--color-primary-light)",
-              border: "1px solid rgba(108, 99, 255, 0.3)",
+              border: "1px solid rgba(124, 111, 255, 0.3)",
               backdropFilter: "blur(8px)",
             }}
           >
-            ⭐ Destacado
+            ✦ Destacado
           </span>
         </div>
       )}
@@ -146,22 +147,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
       </AnimatePresence>
 
+      {/* Gradient bottom para legibilidad */}
+      <div className="absolute bottom-0 left-0 right-0 h-2/3 pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(6,6,8,0.95) 0%, transparent 100%)" }} />
+
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6">
+      <div className="absolute bottom-0 left-0 right-0 p-5">
         <motion.div
-          animate={{ y: hovered ? -8 : 0 }}
+          animate={{ y: hovered ? -6 : 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            {project.tags.map((tag) => (
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {project.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="text-xs px-2 py-0.5 rounded-full font-medium"
                 style={{
-                  background: "rgba(255,255,255,0.1)",
-                  color: "rgba(255,255,255,0.6)",
+                  background: "rgba(255,255,255,0.08)",
+                  color: "rgba(255,255,255,0.55)",
                   backdropFilter: "blur(4px)",
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {tag}
@@ -169,7 +175,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             ))}
           </div>
 
-          <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+          <h3 className="text-base md:text-lg font-bold text-white mb-1 leading-tight">{project.title}</h3>
 
           <AnimatePresence>
             {hovered && (
@@ -262,12 +268,12 @@ export function ProjectsSection() {
           </motion.a>
         </div>
 
-        {/* Masonry-style grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PROJECTS.map((project, index) => (
             <div
               key={project.id}
-              className={project.featured && index === 0 ? "lg:col-span-2" : ""}
+              className={project.featured && index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}
             >
               <ProjectCard project={project} index={index} />
             </div>
