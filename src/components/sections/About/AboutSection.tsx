@@ -110,7 +110,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="nosotros" className="section overflow-hidden"
+    <section ref={sectionRef} id="nosotros" className="section"
       style={{ background: "var(--color-bg)" }}>
       <div className="section-divider absolute top-0 left-0 right-0" />
 

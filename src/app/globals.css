@@ -309,6 +309,13 @@ canvas { display: block; }
 /* ====================================
    CURSOR
    ==================================== */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
 .cursor-dot {
   width: 7px;
   height: 7px;

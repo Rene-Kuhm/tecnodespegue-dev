@@ -28,7 +28,6 @@ export function ContactSection() {
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", company: "", service: "", budget: "", message: "" });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -41,9 +40,6 @@ export function ContactSection() {
     setSending(false);
     setSent(true);
   };
-
-  const fieldClass = (name: string) =>
-    `input-field${focused === name ? " focused" : ""}`;
 
   return (
     <section id="contacto" className="section relative overflow-hidden" style={{ background: "var(--color-bg-secondary)" }}>
@@ -171,16 +167,12 @@ export function ContactSection() {
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
                       <input type="text" name="name" required value={formData.name} onChange={handleChange}
-                        placeholder="Tu nombre completo"
-                        onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
-                        className={fieldClass("name")} />
+                        placeholder="Tu nombre completo" className="input-field" />
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Email *</label>
                       <input type="email" name="email" required value={formData.email} onChange={handleChange}
-                        placeholder="tu@email.com"
-                        onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
-                        className={fieldClass("email")} />
+                        placeholder="tu@email.com" className="input-field" />
                     </div>
                   </div>
 
@@ -188,15 +180,11 @@ export function ContactSection() {
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
                       <input type="text" name="company" value={formData.company} onChange={handleChange}
-                        placeholder="Tu empresa (opcional)"
-                        onFocus={() => setFocused("company")} onBlur={() => setFocused(null)}
-                        className={fieldClass("company")} />
+                        placeholder="Tu empresa (opcional)" className="input-field" />
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
-                      <select name="service" value={formData.service} onChange={handleChange}
-                        onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
-                        className={fieldClass("service")}>
+                      <select name="service" value={formData.service} onChange={handleChange} className="input-field">
                         <option value="">Seleccionar...</option>
                         {SERVICES_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
@@ -205,9 +193,7 @@ export function ContactSection() {
 
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
-                    <select name="budget" value={formData.budget} onChange={handleChange}
-                      onFocus={() => setFocused("budget")} onBlur={() => setFocused(null)}
-                      className={fieldClass("budget")}>
+                    <select name="budget" value={formData.budget} onChange={handleChange} className="input-field">
                       <option value="">Seleccionar rango...</option>
                       {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
                     </select>
@@ -217,8 +203,7 @@ export function ContactSection() {
                     <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
                     <textarea name="message" required rows={4} value={formData.message} onChange={handleChange}
                       placeholder="Contanos sobre tu proyecto, objetivos y timeline..."
-                      onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
-                      className={`${fieldClass("message")} resize-none`} />
+                      className="input-field resize-none" />
                   </div>
 
                   <motion.button

@@ -186,7 +186,7 @@ export function HeroSection() {
           {/* CTAs — centrados, proporciones fijas */}
           <div
             ref={ctaRef}
-            className="opacity-0 flex flex-col xs:flex-row items-center justify-center gap-3"
+            className="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <motion.a
               href="#proyectos"
