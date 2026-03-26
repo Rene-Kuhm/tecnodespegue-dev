@@ -8,107 +8,62 @@ interface FormData {
   email: string;
   company: string;
   service: string;
+  budget: string;
   message: string;
 }
 
-const SERVICES_OPTIONS = [
-  "Desarrollo Web",
-  "App Móvil",
-  "Consultoría IT",
-  "UI/UX Design",
-  "E-commerce",
-  "Otro",
-];
+const SERVICES_OPTIONS = ["Desarrollo Web", "App Móvil", "Consultoría IT", "UI/UX Design", "E-commerce", "Automatización", "Otro"];
+const BUDGET_OPTIONS = ["< $1.000 USD", "$1.000 - $5.000 USD", "$5.000 - $15.000 USD", "$15.000+ USD", "A definir"];
 
 const CONTACT_INFO = [
-  {
-    icon: "✉️",
-    label: "Email",
-    value: "hola@tecnodespegue.dev",
-    href: "mailto:hola@tecnodespegue.dev",
-  },
-  {
-    icon: "💬",
-    label: "WhatsApp",
-    value: "+54 11 0000-0000",
-    href: "https://wa.me/541100000000",
-  },
-  {
-    icon: "📍",
-    label: "Ubicación",
-    value: "Buenos Aires, Argentina",
-    href: "#",
-  },
+  { icon: "✉️", label: "Email", value: "hola@tecnodespegue.dev", href: "mailto:hola@tecnodespegue.dev" },
+  { icon: "💬", label: "WhatsApp", value: "+54 11 0000-0000", href: "https://wa.me/541100000000" },
+  { icon: "📍", label: "Ubicación", value: "Buenos Aires, Argentina", href: "#" },
+  { icon: "⏱️", label: "Respuesta", value: "Menos de 24 horas", href: "#" },
 ];
 
 export function ContactSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(titleRef, { once: true, margin: "-100px" });
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    company: "",
-    service: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "", company: "", service: "", budget: "", message: "" });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [focused, setFocused] = useState<string | null>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // Simulación de envío
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 1800));
     setSending(false);
     setSent(true);
   };
 
-  const inputStyles = {
-    background: "var(--color-surface)",
-    border: "1px solid var(--color-border)",
-    color: "var(--color-text)",
-    borderRadius: "var(--radius-lg)",
-    fontSize: "var(--font-size-sm)",
-  };
-
-  const labelStyles = {
-    fontSize: "var(--font-size-xs)",
-    color: "var(--color-text-muted)",
-    fontWeight: 500,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.05em",
-  };
+  const fieldClass = (name: string) =>
+    `input-field ${focused === name ? "focused" : ""}`;
 
   return (
-    <section
-      ref={sectionRef}
-      id="contacto"
-      className="section relative overflow-hidden"
-      style={{ background: "var(--color-bg-secondary)" }}
-    >
-      {/* Background glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[150px] opacity-8 pointer-events-none"
-        style={{ background: "var(--color-primary)" }}
-      />
+    <section id="contacto" className="section relative overflow-hidden" style={{ background: "var(--color-bg-secondary)" }}>
+      <div className="section-divider absolute top-0 left-0 right-0" />
+
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(124,111,255,0.06) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16">
+        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-14">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-primary)" }}
+            className="chip glass mb-5"
+            style={{ color: "var(--color-primary-light)" }}
           >
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse-glow" style={{ background: "var(--color-primary)" }} />
             Contacto
           </motion.span>
 
@@ -119,8 +74,7 @@ export function ContactSection() {
             className="font-bold mb-4"
             style={{ fontSize: "var(--font-size-3xl)" }}
           >
-            ¿Listo para{" "}
-            <span className="gradient-text">despegar</span>?
+            ¿Listo para <span className="gradient-text">despegar</span>?
           </motion.h2>
 
           <motion.p
@@ -129,70 +83,49 @@ export function ContactSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-base)" }}
           >
-            Contanos tu proyecto y en menos de 24 horas te respondemos con una
-            propuesta personalizada.
+            Contanos tu proyecto y en menos de 24h te respondemos con una propuesta personalizada.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {/* Contact info */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+          {/* Info lateral */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-2 flex flex-col gap-6"
+            className="lg:col-span-2 flex flex-col gap-5"
           >
-            <div
-              className="p-5 md:p-8 rounded-2xl flex-1"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-border)",
-              }}
-            >
-              <h3 className="text-lg font-bold mb-6">Información de contacto</h3>
+            <div className="p-6 rounded-2xl flex-1 flex flex-col"
+              style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+              <h3 className="text-base font-bold mb-6">Información de contacto</h3>
 
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-5 flex-1">
                 {CONTACT_INFO.map((info) => (
-                  <a
-                    key={info.label}
-                    href={info.href}
-                    className="flex items-start gap-4 group"
-                  >
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
-                      style={{
-                        background: "rgba(108,99,255,0.1)",
-                        border: "1px solid rgba(108,99,255,0.2)",
-                      }}
-                    >
+                  <a key={info.label} href={info.href} className="flex items-center gap-3 group">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-base flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: "rgba(124,111,255,0.1)", border: "1px solid rgba(124,111,255,0.18)" }}>
                       {info.icon}
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-widest mb-0.5" style={{ color: "var(--color-text-faint)" }}>
-                        {info.label}
-                      </div>
-                      <div
-                        className="text-sm font-medium group-hover:text-white transition-colors duration-200"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        {info.value}
-                      </div>
+                      <div className="text-xs uppercase tracking-widest mb-0.5" style={{ color: "var(--color-text-faint)" }}>{info.label}</div>
+                      <div className="text-sm font-medium transition-colors duration-200 group-hover:text-white"
+                        style={{ color: "var(--color-text-muted)" }}>{info.value}</div>
                     </div>
                   </a>
                 ))}
               </div>
 
-              {/* CTA WhatsApp */}
+              {/* WhatsApp CTA */}
               <motion.a
                 href="https://wa.me/541100000000"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 w-full flex items-center justify-center gap-3 py-3.5 rounded-xl font-semibold text-white text-sm"
-                style={{ background: "#25d366" }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="mt-6 w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-semibold text-white text-sm"
+                style={{ background: "linear-gradient(135deg, #25d366, #128C7E)", boxShadow: "0 4px 20px rgba(37,211,102,0.3)" }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
                 Escribinos por WhatsApp
               </motion.a>
@@ -201,128 +134,112 @@ export function ContactSection() {
 
           {/* Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-3"
           >
-            <div
-              className="p-5 md:p-8 rounded-2xl h-full"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-border)",
-              }}
-            >
+            <div className="p-6 md:p-8 rounded-2xl"
+              style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+
               {sent ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="h-full flex flex-col items-center justify-center text-center py-12"
+                  className="flex flex-col items-center justify-center text-center py-16"
                 >
-                  <div className="text-6xl mb-4">🚀</div>
-                  <h3 className="text-xl font-bold mb-2">¡Mensaje enviado!</h3>
-                  <p style={{ color: "var(--color-text-muted)" }}>
-                    Te respondemos en menos de 24 horas.
-                  </p>
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 0.6 }}
+                    className="text-6xl mb-5"
+                  >🚀</motion.div>
+                  <h3 className="text-xl font-bold mb-2 text-white">¡Mensaje enviado!</h3>
+                  <p style={{ color: "var(--color-text-muted)" }}>Te respondemos en menos de 24 horas.</p>
+                  <motion.button
+                    onClick={() => setSent(false)}
+                    whileHover={{ scale: 1.03 }}
+                    className="mt-6 text-sm font-medium"
+                    style={{ color: "var(--color-primary-light)" }}
+                  >
+                    Enviar otro mensaje →
+                  </motion.button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="flex flex-col gap-2">
-                      <label style={labelStyles}>Nombre *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Tu nombre"
-                        className="px-4 py-3 w-full outline-none transition-colors duration-200 focus:border-purple-500"
-                        style={inputStyles}
-                      />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
+                      <input type="text" name="name" required value={formData.name} onChange={handleChange}
+                        placeholder="Tu nombre completo"
+                        onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
+                        className={fieldClass("name")} />
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <label style={labelStyles}>Email *</label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Email *</label>
+                      <input type="email" name="email" required value={formData.email} onChange={handleChange}
                         placeholder="tu@email.com"
-                        className="px-4 py-3 w-full outline-none transition-colors duration-200 focus:border-purple-500"
-                        style={inputStyles}
-                      />
+                        onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
+                        className={fieldClass("email")} />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="flex flex-col gap-2">
-                      <label style={labelStyles}>Empresa</label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
+                      <input type="text" name="company" value={formData.company} onChange={handleChange}
                         placeholder="Tu empresa (opcional)"
-                        className="px-4 py-3 w-full outline-none transition-colors duration-200"
-                        style={inputStyles}
-                      />
+                        onFocus={() => setFocused("company")} onBlur={() => setFocused(null)}
+                        className={fieldClass("company")} />
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <label style={labelStyles}>Servicio</label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="px-4 py-3 w-full outline-none transition-colors duration-200 cursor-pointer"
-                        style={inputStyles}
-                      >
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
+                      <select name="service" value={formData.service} onChange={handleChange}
+                        onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
+                        className={fieldClass("service")} style={{ cursor: "pointer" }}>
                         <option value="">Seleccionar...</option>
-                        {SERVICES_OPTIONS.map((s) => (
-                          <option key={s} value={s}>{s}</option>
-                        ))}
+                        {SERVICES_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label style={labelStyles}>Mensaje *</label>
-                    <textarea
-                      name="message"
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Contanos sobre tu proyecto..."
-                      className="px-4 py-3 w-full outline-none transition-colors duration-200 resize-none"
-                      style={inputStyles}
-                    />
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
+                    <select name="budget" value={formData.budget} onChange={handleChange}
+                      onFocus={() => setFocused("budget")} onBlur={() => setFocused(null)}
+                      className={fieldClass("budget")} style={{ cursor: "pointer" }}>
+                      <option value="">Seleccionar rango...</option>
+                      {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
+                    <textarea name="message" required rows={4} value={formData.message} onChange={handleChange}
+                      placeholder="Contanos sobre tu proyecto, objetivos y timeline..."
+                      onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
+                      className={`${fieldClass("message")} resize-none`} />
                   </div>
 
                   <motion.button
                     type="submit"
                     disabled={sending}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="py-4 rounded-xl font-semibold text-white flex items-center justify-center gap-2 mt-2"
-                    style={{
-                      background: sending ? "rgba(108,99,255,0.5)" : "var(--gradient-primary)",
-                      cursor: sending ? "not-allowed" : "pointer",
-                    }}
+                    whileHover={!sending ? { scale: 1.02, y: -2 } : {}}
+                    whileTap={!sending ? { scale: 0.97 } : {}}
+                    className="btn-primary mt-1 w-full py-4"
+                    style={{ opacity: sending ? 0.7 : 1, cursor: sending ? "not-allowed" : "pointer" }}
                   >
                     {sending ? (
                       <>
-                        <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="30" strokeDashoffset="10" />
+                        <svg className="animate-spin" width="17" height="17" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="40" strokeDashoffset="15" />
                         </svg>
                         Enviando...
                       </>
                     ) : (
                       <>
                         Enviar mensaje
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                           <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                       </>
