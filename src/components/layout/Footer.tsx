@@ -6,65 +6,74 @@ import { motion } from "framer-motion";
 const LINKS = {
   servicios: [
     { label: "Desarrollo Web", href: "#servicios" },
-    { label: "Aplicaciones Móviles", href: "#servicios" },
+    { label: "Apps Móviles", href: "#servicios" },
     { label: "Consultoría IT", href: "#servicios" },
     { label: "UI/UX Design", href: "#servicios" },
   ],
   empresa: [
     { label: "Nosotros", href: "#nosotros" },
     { label: "Proyectos", href: "#proyectos" },
-    { label: "Blog", href: "/blog" },
     { label: "Contacto", href: "#contacto" },
   ],
 };
+
+const SOCIAL = [
+  { label: "GH", href: "#", title: "GitHub" },
+  { label: "LI", href: "#", title: "LinkedIn" },
+  { label: "TW", href: "#", title: "Twitter" },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer
-      className="relative pt-20 pb-10 overflow-hidden"
-      style={{ borderTop: "1px solid var(--color-border)" }}
+      className="relative pt-16 pb-8 overflow-hidden"
+      style={{ borderTop: "1px solid var(--color-border)", background: "var(--color-bg)" }}
     >
-      {/* Glow background */}
+      {/* Ambient glow */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-[120px] opacity-10 pointer-events-none"
-        style={{ background: "var(--color-primary)" }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(124,111,255,0.06) 0%, transparent 70%)", filter: "blur(60px)" }}
       />
 
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-10 md:mb-16">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+        {/* Main grid — brand ocupa columna completa en mobile, 2 cols en lg */}
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] mb-12">
+
+          {/* Brand — siempre primera fila completa en mobile */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
               <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
                 style={{ background: "var(--gradient-primary)" }}
               >
                 TD
               </div>
-              <span className="font-bold text-lg tracking-tight">
+              <span className="font-bold text-base tracking-tight">
                 Tecno<span className="gradient-text">Despegue</span>
               </span>
             </Link>
+
             <p
-              className="text-sm leading-relaxed max-w-xs"
+              className="text-sm leading-relaxed max-w-[280px] mb-6"
               style={{ color: "var(--color-text-muted)" }}
             >
-              Transformamos ideas en experiencias digitales extraordinarias.
-              Desarrollo web, consultoría y soluciones tecnológicas de alto impacto.
+              Agencia de desarrollo web, consultoría informática y soluciones
+              tecnológicas que transforman ideas en realidad digital.
             </p>
-            {/* Social */}
-            <div className="flex items-center gap-4 mt-6">
-              {["github", "linkedin", "twitter"].map((social) => (
+
+            <div className="flex items-center gap-3">
+              {SOCIAL.map((s) => (
                 <motion.a
-                  key={social}
-                  href="#"
-                  whileHover={{ y: -2, scale: 1.1 }}
-                  className="w-9 h-9 rounded-lg glass flex items-center justify-center text-xs font-bold uppercase"
+                  key={s.label}
+                  href={s.href}
+                  title={s.title}
+                  whileHover={{ y: -2, scale: 1.08 }}
+                  className="w-8 h-8 rounded-lg glass flex items-center justify-center text-xs font-bold"
                   style={{ color: "var(--color-text-muted)" }}
                 >
-                  {social[0].toUpperCase()}
+                  {s.label}
                 </motion.a>
               ))}
             </div>
@@ -73,12 +82,12 @@ export function Footer() {
           {/* Servicios */}
           <div>
             <h4
-              className="text-sm font-semibold uppercase tracking-widest mb-4"
+              className="text-xs font-semibold uppercase tracking-widest mb-4"
               style={{ color: "var(--color-text-faint)" }}
             >
               Servicios
             </h4>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2.5">
               {LINKS.servicios.map((link) => (
                 <li key={link.label}>
                   <Link
@@ -96,12 +105,12 @@ export function Footer() {
           {/* Empresa */}
           <div>
             <h4
-              className="text-sm font-semibold uppercase tracking-widest mb-4"
+              className="text-xs font-semibold uppercase tracking-widest mb-4"
               style={{ color: "var(--color-text-faint)" }}
             >
               Empresa
             </h4>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2.5">
               {LINKS.empresa.map((link) => (
                 <li key={link.label}>
                   <Link
@@ -114,15 +123,29 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+
+            {/* CTA mini */}
+            <div className="mt-6">
+              <Link
+                href="#contacto"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold"
+                style={{ color: "var(--color-primary-light)" }}
+              >
+                Hablemos
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div
-          className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8"
+          className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6"
           style={{ borderTop: "1px solid var(--color-border)" }}
         >
-          <p className="text-xs" style={{ color: "var(--color-text-faint)" }}>
+          <p className="text-xs text-center sm:text-left" style={{ color: "var(--color-text-faint)" }}>
             © {year} TecnoDespegue. Todos los derechos reservados.
           </p>
           <p className="text-xs" style={{ color: "var(--color-text-faint)" }}>

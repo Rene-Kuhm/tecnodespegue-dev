@@ -228,7 +228,7 @@ export function ProjectsSection() {
     >
       <div className="container">
         {/* Header */}
-        <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
           <div>
             <motion.span
               initial={{ opacity: 0, y: 10 }}

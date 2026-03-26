@@ -180,27 +180,27 @@ export function TestimonialsSection() {
           </div>
 
           {/* All testimonials mini */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-6">
             {TESTIMONIALS.map((tm, i) => (
               <motion.button
                 key={tm.id}
                 onClick={() => setActive(i)}
-                whileHover={{ y: -3 }}
-                className="p-3 rounded-xl text-left transition-all duration-300"
+                whileHover={{ y: -2 }}
+                className="p-2.5 rounded-xl text-left transition-all duration-300 w-full min-w-0"
                 style={{
                   background: i === active ? "var(--color-surface-hover)" : "var(--color-surface)",
                   border: `1px solid ${i === active ? tm.color + "40" : "var(--color-border)"}`,
-                  boxShadow: i === active ? `0 4px 20px ${tm.color}20` : "none",
+                  boxShadow: i === active ? `0 4px 16px ${tm.color}18` : "none",
                 }}
               >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                    style={{ background: tm.color }}>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                    style={{ background: tm.color, fontSize: "0.6rem" }}>
                     {tm.avatar}
                   </div>
-                  <div className="text-xs font-semibold text-white truncate">{tm.name}</div>
+                  <div className="text-xs font-semibold text-white truncate leading-tight">{tm.name.split(" ")[0]}</div>
                 </div>
-                <div className="text-xs truncate" style={{ color: "var(--color-text-faint)" }}>{tm.company}</div>
+                <div className="text-xs truncate" style={{ color: "var(--color-text-faint)", fontSize: "0.65rem" }}>{tm.company}</div>
               </motion.button>
             ))}
           </div>

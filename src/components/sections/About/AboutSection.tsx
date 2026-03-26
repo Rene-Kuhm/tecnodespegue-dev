@@ -118,7 +118,7 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Visual card */}
-          <div className="relative order-2 lg:order-1">
+          <div className="relative order-2 lg:order-1 px-4 lg:px-0">
             <div ref={imageRef} className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: "4/5" }}>
               <div className="absolute inset-0"
                 style={{ background: "linear-gradient(145deg, #130d2e 0%, #091525 50%, #080608 100%)" }} />
@@ -183,7 +183,7 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -top-5 -right-3 glass-strong rounded-2xl p-4 hidden lg:block"
+              className="absolute -top-4 -right-2 glass-strong rounded-2xl p-4 hidden lg:block z-10"
               style={{ boxShadow: "var(--shadow-elevated)" }}
             >
               <div className="text-2xl font-black gradient-text leading-none">+50</div>
@@ -196,7 +196,7 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-4 -left-3 glass-strong rounded-2xl p-4 hidden lg:block"
+              className="absolute -bottom-4 -left-2 glass-strong rounded-2xl p-4 hidden lg:block z-10"
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full animate-pulse-glow" style={{ background: "#6bcb77" }} />

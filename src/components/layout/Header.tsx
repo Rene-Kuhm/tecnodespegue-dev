@@ -121,7 +121,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <Link href="#contacto" className="btn-primary text-sm">
+            <Link href="#contacto" className="btn-primary">
               Hablemos
             </Link>
           </div>

@@ -183,16 +183,16 @@ export function HeroSection() {
             que transforman tu visión en realidad digital extraordinaria.
           </p>
 
-          {/* CTAs */}
+          {/* CTAs — centrados, proporciones fijas */}
           <div
             ref={ctaRef}
-            className="opacity-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full max-w-sm sm:max-w-none mx-auto"
+            className="opacity-0 flex flex-col xs:flex-row items-center justify-center gap-3"
           >
             <motion.a
               href="#proyectos"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-primary justify-center"
+              className="btn-primary"
             >
               Ver proyectos
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -204,7 +204,7 @@ export function HeroSection() {
               href="#contacto"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-outline justify-center"
+              className="btn-outline"
             >
               Hablemos de tu proyecto
             </motion.a>
