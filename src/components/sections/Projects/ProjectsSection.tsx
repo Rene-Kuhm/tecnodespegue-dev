@@ -61,125 +61,104 @@ const PROJECTS: Project[] = [
   },
 ];
 
+// Colores por índice para el accent de cada card
+const ACCENT_COLORS = ["#7c6fff", "#00e5ff", "#ff6b9d", "#ffb347", "#6bcb77", "#c77dff"];
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const accent = ACCENT_COLORS[index % ACCENT_COLORS.length];
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -4 }}
-      className="group relative rounded-2xl overflow-hidden flex flex-col"
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -5 }}
+      className="group relative flex flex-col rounded-2xl overflow-hidden"
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
-        minHeight: "280px",
+        minHeight: "260px",
       }}
     >
-      {/* Fondo con gradiente de color único por proyecto */}
+      {/* Accent bar top */}
+      <div className="h-1 w-full flex-shrink-0" style={{ background: `linear-gradient(90deg, ${accent}, ${accent}66)` }} />
+
+      {/* Glow hover */}
       <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(135deg,
-            hsl(${(index * 60) % 360}, 60%, 12%) 0%,
-            hsl(${(index * 60 + 120) % 360}, 50%, 8%) 100%)`,
-        }}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${accent}0d 0%, transparent 70%)` }}
+      />
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1px ${accent}22` }}
       />
 
-      {/* Pattern decorativo */}
-      <div
-        className="absolute inset-0 opacity-25"
-        style={{
-          backgroundImage: `radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.35) 0%, transparent 45%),
-                            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.25) 0%, transparent 45%)`,
-        }}
-      />
-
-      {/* Número del proyecto */}
-      <div
-        className="absolute top-4 left-5 font-black select-none"
-        style={{ color: "white", opacity: 0.08, fontSize: "3.5rem", lineHeight: 1 }}
+      {/* Número decorativo */}
+      <span
+        className="absolute bottom-4 right-5 font-black pointer-events-none select-none"
+        style={{ color: accent, opacity: 0.06, fontSize: "5rem", lineHeight: 1 }}
       >
         {project.id}
-      </div>
+      </span>
 
-      {/* Featured badge */}
-      {project.featured && (
-        <div className="absolute top-4 right-4 z-10">
-          <span
-            className="text-xs font-semibold px-2.5 py-1 rounded-full"
-            style={{
-              background: "rgba(124, 111, 255, 0.25)",
-              color: "var(--color-primary-light)",
-              border: "1px solid rgba(124, 111, 255, 0.3)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            ✦ Destacado
-          </span>
-        </div>
-      )}
-
-      {/* Gradient overlay para legibilidad del contenido */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(to top, rgba(6,6,8,0.97) 0%, rgba(6,6,8,0.3) 55%, transparent 100%)" }}
-      />
-
-      {/* Hover border glow */}
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-        style={{ boxShadow: "inset 0 0 0 1px rgba(124,111,255,0.25)" }}
-      />
-
-      {/* Contenido — siempre visible, crece al fondo */}
-      <div className="relative z-10 flex flex-col justify-end flex-1 p-5">
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {project.tags.slice(0, 3).map((tag) => (
+      {/* Contenido */}
+      <div className="relative z-10 flex flex-col flex-1 p-5">
+        {/* Header row */}
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <div className="flex flex-wrap gap-1.5 flex-1">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                style={{
+                  background: `${accent}14`,
+                  color: accent,
+                  border: `1px solid ${accent}25`,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          {project.featured && (
             <span
-              key={tag}
-              className="text-xs px-2 py-0.5 rounded-full font-medium"
+              className="text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0"
               style={{
-                background: "rgba(255,255,255,0.08)",
-                color: "rgba(255,255,255,0.55)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(124,111,255,0.15)",
+                color: "var(--color-primary-light)",
+                border: "1px solid rgba(124,111,255,0.25)",
               }}
             >
-              {tag}
+              ✦
             </span>
-          ))}
+          )}
         </div>
 
         {/* Título */}
         <h3
-          className="font-bold text-white mb-2 leading-tight"
-          style={{ fontSize: "var(--font-size-base)" }}
+          className="font-bold mb-2 leading-snug"
+          style={{ color: "var(--color-text)", fontSize: "var(--font-size-base)" }}
         >
           {project.title}
         </h3>
 
-        {/* Descripción — siempre visible */}
+        {/* Descripción */}
         <p
-          className="leading-relaxed mb-4"
-          style={{ color: "rgba(255,255,255,0.55)", fontSize: "var(--font-size-sm)" }}
+          className="leading-relaxed flex-1"
+          style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}
         >
           {project.description}
         </p>
 
         {/* CTA */}
-        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span
-            className="text-sm font-semibold"
-            style={{ color: "var(--color-primary-light)" }}
-          >
+        <div className="mt-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="text-sm font-semibold" style={{ color: accent }}>
             Ver proyecto
           </span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-            style={{ color: "var(--color-primary-light)" }}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: accent }}>
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </div>
@@ -193,11 +172,7 @@ export function ProjectsSection() {
   const isInView = useInView(titleRef, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="proyectos"
-      className="section"
-      style={{ background: "var(--color-bg-secondary)" }}
-    >
+    <section id="proyectos" className="section" style={{ background: "var(--color-bg-secondary)" }}>
       <div className="container">
         {/* Header */}
         <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
@@ -219,8 +194,7 @@ export function ProjectsSection() {
               className="font-bold"
               style={{ fontSize: "var(--font-size-3xl)" }}
             >
-              Proyectos que{" "}
-              <span className="gradient-text">hablan</span> por sí solos
+              Proyectos que <span className="gradient-text">hablan</span> por sí solos
             </motion.h2>
           </div>
 
