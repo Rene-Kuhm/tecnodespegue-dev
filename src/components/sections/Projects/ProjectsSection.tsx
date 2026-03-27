@@ -185,8 +185,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 w-fit text-sm font-semibold transition-all duration-200"
-            style={{ color: accent, opacity: 0.7 }}
+            className="flex items-center justify-center gap-1.5 w-full text-sm font-semibold transition-all duration-200 py-2 rounded-lg"
+            style={{ color: accent, opacity: 0.7, border: `1px solid ${accent}25`, background: `${accent}08` }}
             onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={e => (e.currentTarget.style.opacity = "0.7")}
           >
