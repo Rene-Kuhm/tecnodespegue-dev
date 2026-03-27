@@ -77,7 +77,7 @@ export function AboutSection() {
       <div className="section-divider absolute top-0 left-0 right-0" />
 
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
           {/* ── Lado visual ── */}
           <div className="order-2 lg:order-1 flex flex-col gap-5">

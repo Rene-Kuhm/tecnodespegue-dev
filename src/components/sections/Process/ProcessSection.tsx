@@ -91,7 +91,7 @@ export function ProcessSection() {
         {/* DESKTOP — stepper horizontal */}
         <div className="hidden lg:block">
           {/* Línea conectora */}
-          <div className="relative flex items-start justify-between gap-3 mb-0">
+          <div className="relative flex items-start justify-between gap-4 mb-0">
             {/* Línea de fondo que conecta los dots */}
             <div
               className="absolute top-5 left-[10%] right-[10%] h-px"
@@ -105,11 +105,11 @@ export function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative flex flex-col items-center text-center flex-1"
+                className="relative flex flex-col items-center text-center flex-1 min-w-0"
               >
                 {/* Dot numerado */}
                 <div
-                  className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs mb-6 flex-shrink-0"
+                  className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs mb-5 flex-shrink-0"
                   style={{
                     background: `${step.color}18`,
                     border: `2px solid ${step.color}60`,
@@ -123,29 +123,29 @@ export function ProcessSection() {
                 {/* Card */}
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="w-full p-5 rounded-2xl flex flex-col items-center text-center"
+                  className="w-full p-4 rounded-2xl flex flex-col items-center text-center overflow-hidden"
                   style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
                 >
                   {/* Icon */}
                   <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 flex-shrink-0"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-3 flex-shrink-0"
                     style={{ background: `${step.color}14`, border: `1px solid ${step.color}25` }}
                   >
                     {step.icon}
                   </div>
 
-                  <h3 className="font-bold text-white mb-1" style={{ fontSize: "var(--font-size-sm)" }}>
+                  <h3 className="font-bold text-white mb-1 w-full truncate" style={{ fontSize: "var(--font-size-sm)" }}>
                     {step.title}
                   </h3>
 
                   <span
-                    className="text-xs px-2 py-0.5 rounded-full font-medium mb-3"
+                    className="text-xs px-2 py-0.5 rounded-full font-medium mb-2 flex-shrink-0"
                     style={{ background: `${step.color}15`, color: step.color, border: `1px solid ${step.color}25` }}
                   >
                     {step.duration}
                   </span>
 
-                  <p className="leading-relaxed" style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-xs)" }}>
+                  <p className="leading-relaxed w-full" style={{ color: "var(--color-text-muted)", fontSize: "clamp(0.7rem, 1.1vw, 0.8rem)" }}>
                     {step.description}
                   </p>
                 </motion.div>

@@ -253,7 +253,7 @@ export function ProjectsSection() {
           {PROJECTS.map((project, index) => (
             <div
               key={project.id}
-              className={project.featured && index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}
+              className={`h-full ${project.featured && index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}`}
             >
               <ProjectCard project={project} index={index} />
             </div>
