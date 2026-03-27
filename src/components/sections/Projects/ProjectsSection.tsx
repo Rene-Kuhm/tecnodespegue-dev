@@ -7,56 +7,62 @@ import type { Project } from "@/types";
 const PROJECTS: Project[] = [
   {
     id: "01",
-    title: "E-commerce Premium",
+    title: "E-commerce Profesional",
     description:
-      "Plataforma de e-commerce con +10.000 productos, integración con MercadoPago y panel de administración custom.",
-    image: "/projects/ecommerce.jpg",
-    tags: ["Next.js", "TypeScript", "MercadoPago", "PostgreSQL"],
+      "Plataforma de e-commerce completa con catálogo de productos, carrito de compras, pasarela de pagos y panel de administración.",
+    image: "",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Stripe"],
+    url: "https://github.com/Rene-Kuhm/e-commerce-profecional",
     featured: true,
   },
   {
     id: "02",
-    title: "Dashboard Analytics",
+    title: "Gestión de Reclamos",
     description:
-      "Panel de analíticas en tiempo real con visualizaciones avanzadas, reportes automatizados y alertas inteligentes.",
-    image: "/projects/dashboard.jpg",
-    tags: ["React", "D3.js", "WebSockets", "Node.js"],
+      "Sistema de gestión y seguimiento de reclamos con panel administrativo, notificaciones en tiempo real y reportes.",
+    image: "",
+    tags: ["Next.js", "TypeScript", "Supabase", "React"],
+    url: "https://github.com/Rene-Kuhm/gestion-de-reclamos",
     featured: true,
   },
   {
     id: "03",
-    title: "App Fintech",
+    title: "Cospec Ltd",
     description:
-      "Aplicación móvil para gestión financiera personal con IA integrada para análisis predictivo de gastos.",
-    image: "/projects/fintech.jpg",
-    tags: ["React Native", "AI", "Node.js", "MongoDB"],
+      "Sitio web corporativo para empresa de telecomunicaciones con diseño moderno, animaciones y formulario de contacto.",
+    image: "",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    url: "https://github.com/Rene-Kuhm/cospec-ltd",
     featured: false,
   },
   {
     id: "04",
-    title: "Portal Corporativo",
+    title: "TDP Blog",
     description:
-      "Web institucional con CMS headless, multiidioma y optimización SEO avanzada para empresa multinacional.",
-    image: "/projects/corporate.jpg",
-    tags: ["Next.js", "Sanity", "i18n", "SEO"],
+      "Blog personal con CMS headless, artículos en MDX, categorías, búsqueda y diseño optimizado para lectura.",
+    image: "",
+    tags: ["Astro", "TypeScript", "MDX", "Tailwind"],
+    url: "https://github.com/Rene-Kuhm/TDPBlog",
     featured: false,
   },
   {
     id: "05",
-    title: "SaaS B2B",
+    title: "Twitter Clone",
     description:
-      "Plataforma SaaS de gestión de proyectos con colaboración en tiempo real, facturación y onboarding automatizado.",
-    image: "/projects/saas.jpg",
-    tags: ["React", "Supabase", "Stripe", "TypeScript"],
+      "Clon funcional de Twitter con autenticación, timeline en tiempo real, likes, retweets y perfiles de usuario.",
+    image: "",
+    tags: ["Next.js", "TypeScript", "Supabase", "Tailwind"],
+    url: "https://github.com/Rene-Kuhm/twitter-clone",
     featured: true,
   },
   {
     id: "06",
-    title: "Marketplace NFT",
+    title: "Spiderman Web",
     description:
-      "Marketplace de NFTs con wallet integration, sistema de subastas y galería 3D interactiva.",
-    image: "/projects/nft.jpg",
-    tags: ["Next.js", "Web3", "Three.js", "Solidity"],
+      "Landing page visual interactiva con animaciones avanzadas, efectos 3D y diseño inspirado en el universo Spider-Man.",
+    image: "",
+    tags: ["TypeScript", "GSAP", "Three.js", "CSS"],
+    url: "https://github.com/Rene-Kuhm/spiderman-web",
     featured: false,
   },
 ];
@@ -154,14 +160,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </p>
 
         {/* CTA */}
-        <div className="mt-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="text-sm font-semibold" style={{ color: accent }}>
-            Ver proyecto
-          </span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: accent }}>
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </div>
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-fit"
+            style={{ color: accent }}
+          >
+            <span className="text-sm font-semibold">Ver en GitHub</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        )}
       </div>
     </motion.div>
   );
