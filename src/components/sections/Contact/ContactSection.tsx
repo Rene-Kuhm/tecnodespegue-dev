@@ -165,26 +165,26 @@ export function ContactSection() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
-                      <input type="text" name="name" required value={formData.name} onChange={handleChange}
-                        placeholder="Tu nombre completo" className="input-field" />
+                      <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Nombre *</label>
+                      <input type="text" id="contact-name" name="name" required value={formData.name} onChange={handleChange}
+                        placeholder="Tu nombre completo" className="input-field" autoComplete="name" />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Email *</label>
-                      <input type="email" name="email" required value={formData.email} onChange={handleChange}
-                        placeholder="tu@email.com" className="input-field" />
+                      <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Email *</label>
+                      <input type="email" id="contact-email" name="email" required value={formData.email} onChange={handleChange}
+                        placeholder="tu@email.com" className="input-field" autoComplete="email" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
-                      <input type="text" name="company" value={formData.company} onChange={handleChange}
-                        placeholder="Tu empresa (opcional)" className="input-field" />
+                      <label htmlFor="contact-company" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Empresa</label>
+                      <input type="text" id="contact-company" name="company" value={formData.company} onChange={handleChange}
+                        placeholder="Tu empresa (opcional)" className="input-field" autoComplete="organization" />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
-                      <select name="service" value={formData.service} onChange={handleChange} className="input-field">
+                      <label htmlFor="contact-service" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Servicio</label>
+                      <select id="contact-service" name="service" value={formData.service} onChange={handleChange} className="input-field">
                         <option value="">Seleccionar...</option>
                         {SERVICES_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
@@ -192,16 +192,16 @@ export function ContactSection() {
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
-                    <select name="budget" value={formData.budget} onChange={handleChange} className="input-field">
+                    <label htmlFor="contact-budget" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Presupuesto estimado</label>
+                    <select id="contact-budget" name="budget" value={formData.budget} onChange={handleChange} className="input-field">
                       <option value="">Seleccionar rango...</option>
                       {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
                     </select>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
-                    <textarea name="message" required rows={4} value={formData.message} onChange={handleChange}
+                    <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-faint)" }}>Mensaje *</label>
+                    <textarea id="contact-message" name="message" required rows={4} value={formData.message} onChange={handleChange}
                       placeholder="Contanos sobre tu proyecto, objetivos y timeline..."
                       className="input-field resize-none" />
                   </div>

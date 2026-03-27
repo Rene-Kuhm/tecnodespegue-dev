@@ -98,7 +98,7 @@ export function TestimonialsSection() {
         </div>
 
         {/* Testimonial principal */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto" aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div
               key={t.id}
@@ -149,8 +149,9 @@ export function TestimonialsSection() {
           <div className="flex items-center justify-between mt-8">
             {/* Dots */}
             <div className="flex gap-2">
-              {TESTIMONIALS.map((_, i) => (
+              {TESTIMONIALS.map((tm, i) => (
                 <button key={i} onClick={() => setActive(i)}
+                  aria-label={`Ver testimonio de ${tm.name}`}
                   className="transition-all duration-300 rounded-full"
                   style={{
                     width: i === active ? "24px" : "8px",
