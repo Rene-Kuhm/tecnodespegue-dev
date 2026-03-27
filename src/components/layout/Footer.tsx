@@ -18,9 +18,9 @@ const LINKS = {
 };
 
 const SOCIAL = [
-  { label: "GH", href: "#", title: "GitHub" },
-  { label: "LI", href: "#", title: "LinkedIn" },
-  { label: "TW", href: "#", title: "Twitter" },
+  { label: "GH", href: "https://github.com/Rene-Kuhm", title: "GitHub" },
+  { label: "LI", href: "https://linkedin.com/in/rene-kuhm", title: "LinkedIn" },
+  { label: "TW", href: "https://twitter.com/ReneKuhm", title: "Twitter/X" },
 ];
 
 export function Footer() {
@@ -68,7 +68,10 @@ export function Footer() {
                 <motion.a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   title={s.title}
+                  aria-label={s.title}
                   whileHover={{ y: -2, scale: 1.08 }}
                   className="w-8 h-8 rounded-lg glass flex items-center justify-center text-xs font-bold"
                   style={{ color: "var(--color-text-muted)" }}

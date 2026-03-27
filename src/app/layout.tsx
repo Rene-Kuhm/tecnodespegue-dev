@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tecnodespegue.dev"),
   title: {
     default: "TecnoDespegue — Agencia de Desarrollo Web & Consultoría Informática",
     template: "%s | TecnoDespegue",

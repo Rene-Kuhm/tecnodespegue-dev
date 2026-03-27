@@ -8,6 +8,9 @@ export function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Skip on touch devices
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
@@ -20,14 +23,9 @@ export function CustomCursor() {
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-
-      gsap.set(dot, {
-        x: mouseX,
-        y: mouseY,
-      });
+      gsap.set(dot, { x: mouseX, y: mouseY });
     };
 
-    // Ring sigue con lag suave
     const animate = () => {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
@@ -37,54 +35,37 @@ export function CustomCursor() {
 
     const raf = requestAnimationFrame(animate);
 
-    // Hover en links y botones → expande el ring
     const handleMouseEnter = () => {
-      gsap.to(ring, {
-        width: 56,
-        height: 56,
-        opacity: 0.8,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+      gsap.to(ring, { width: 56, height: 56, opacity: 0.8, duration: 0.3, ease: "power2.out" });
       gsap.to(dot, { scale: 0, duration: 0.2 });
     };
 
     const handleMouseLeave = () => {
-      gsap.to(ring, {
-        width: 36,
-        height: 36,
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+      gsap.to(ring, { width: 36, height: 36, opacity: 1, duration: 0.3, ease: "power2.out" });
       gsap.to(dot, { scale: 1, duration: 0.2 });
     };
 
     window.addEventListener("mousemove", onMouseMove);
 
-    const interactives = document.querySelectorAll("a, button, [data-cursor]");
-    interactives.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
-    });
+    // Use event delegation instead of MutationObserver — single listener on body
+    const onPointerOver = (e: PointerEvent) => {
+      const target = (e.target as HTMLElement).closest("a, button, [data-cursor]");
+      if (target) handleMouseEnter();
+    };
 
-    // Observer para nuevos elementos
-    const observer = new MutationObserver(() => {
-      const newInteractives = document.querySelectorAll("a, button, [data-cursor]");
-      newInteractives.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-        el.addEventListener("mouseenter", handleMouseEnter);
-        el.addEventListener("mouseleave", handleMouseLeave);
-      });
-    });
+    const onPointerOut = (e: PointerEvent) => {
+      const target = (e.target as HTMLElement).closest("a, button, [data-cursor]");
+      if (target) handleMouseLeave();
+    };
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    document.body.addEventListener("pointerover", onPointerOver);
+    document.body.addEventListener("pointerout", onPointerOut);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      document.body.removeEventListener("pointerover", onPointerOver);
+      document.body.removeEventListener("pointerout", onPointerOut);
       cancelAnimationFrame(raf);
-      observer.disconnect();
     };
   }, []);
 

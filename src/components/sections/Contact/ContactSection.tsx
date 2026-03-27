@@ -28,6 +28,7 @@ export function ContactSection() {
   const [formData, setFormData] = useState<FormData>({ name: "", email: "", company: "", service: "", budget: "", message: "" });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [lastSubmit, setLastSubmit] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -35,7 +36,14 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate limit: 30s between submissions
+    const now = Date.now();
+    if (now - lastSubmit < 30000) return;
+
     setSending(true);
+    setLastSubmit(now);
+    // TODO: Replace with actual API call (POST /api/contact)
     await new Promise((r) => setTimeout(r, 1800));
     setSending(false);
     setSent(true);
@@ -115,6 +123,9 @@ export function ContactSection() {
               {/* WhatsApp CTA */}
               <motion.a
                 href="https://wa.me/541100000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contactar por WhatsApp"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.97 }}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-white text-sm"
