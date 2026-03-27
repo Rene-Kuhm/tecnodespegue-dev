@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import type { Project } from "@/types";
 
 const PROJECTS: Project[] = [
@@ -64,58 +64,51 @@ const PROJECTS: Project[] = [
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="group relative rounded-2xl overflow-hidden"
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4 }}
+      className="group relative rounded-2xl overflow-hidden flex flex-col"
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
-        aspectRatio: "16/9",
-        minHeight: "200px",
+        minHeight: "280px",
       }}
     >
-      {/* Imagen placeholder con gradiente */}
+      {/* Fondo con gradiente de color único por proyecto */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(135deg, 
-            hsl(${(index * 60) % 360}, 60%, 15%) 0%, 
-            hsl(${(index * 60 + 120) % 360}, 50%, 10%) 100%)`,
+          background: `linear-gradient(135deg,
+            hsl(${(index * 60) % 360}, 60%, 12%) 0%,
+            hsl(${(index * 60 + 120) % 360}, 50%, 8%) 100%)`,
         }}
       />
 
       {/* Pattern decorativo */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-25"
         style={{
-          backgroundImage: `radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.4) 0%, transparent 40%),
-                            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.3) 0%, transparent 40%)`,
+          backgroundImage: `radial-gradient(circle at 20% 80%, rgba(108, 99, 255, 0.35) 0%, transparent 45%),
+                            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.25) 0%, transparent 45%)`,
         }}
       />
 
       {/* Número del proyecto */}
       <div
-        className="absolute top-4 left-5 text-4xl font-black opacity-10 select-none"
-        style={{ color: "white", lineHeight: 1 }}
+        className="absolute top-4 left-5 font-black select-none"
+        style={{ color: "white", opacity: 0.08, fontSize: "3.5rem", lineHeight: 1 }}
       >
         {project.id}
       </div>
 
       {/* Featured badge */}
       {project.featured && (
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-10">
           <span
             className="text-xs font-semibold px-2.5 py-1 rounded-full"
             style={{
@@ -130,87 +123,66 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      {/* Overlay on hover */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0"
-            style={{
-              background: "rgba(8, 8, 8, 0.85)",
-              backdropFilter: "blur(4px)",
-            }}
-          />
-        )}
-      </AnimatePresence>
+      {/* Gradient overlay para legibilidad del contenido */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to top, rgba(6,6,8,0.97) 0%, rgba(6,6,8,0.3) 55%, transparent 100%)" }}
+      />
 
-      {/* Gradient bottom para legibilidad */}
-      <div className="absolute bottom-0 left-0 right-0 h-2/3 pointer-events-none"
-        style={{ background: "linear-gradient(to top, rgba(6,6,8,0.95) 0%, transparent 100%)" }} />
+      {/* Hover border glow */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+        style={{ boxShadow: "inset 0 0 0 1px rgba(124,111,255,0.25)" }}
+      />
 
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <motion.div
-          animate={{ y: hovered ? -6 : 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-2">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-0.5 rounded-full font-medium"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.55)",
-                  backdropFilter: "blur(4px)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <h3 className="text-base md:text-lg font-bold text-white mb-1 leading-tight">{project.title}</h3>
-
-          <AnimatePresence>
-            {hovered && (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-                className="text-sm"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                {project.description}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* CTA hover */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3, delay: 0.15 }}
-              className="mt-4 flex items-center gap-2 text-sm font-semibold"
-              style={{ color: "var(--color-primary-light)" }}
+      {/* Contenido — siempre visible, crece al fondo */}
+      <div className="relative z-10 flex flex-col justify-end flex-1 p-5">
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="text-xs px-2 py-0.5 rounded-full font-medium"
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                color: "rgba(255,255,255,0.55)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
             >
-              Ver proyecto
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          )}
-        </AnimatePresence>
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Título */}
+        <h3
+          className="font-bold text-white mb-2 leading-tight"
+          style={{ fontSize: "var(--font-size-base)" }}
+        >
+          {project.title}
+        </h3>
+
+        {/* Descripción — siempre visible */}
+        <p
+          className="leading-relaxed mb-4"
+          style={{ color: "rgba(255,255,255,0.55)", fontSize: "var(--font-size-sm)" }}
+        >
+          {project.description}
+        </p>
+
+        {/* CTA */}
+        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span
+            className="text-sm font-semibold"
+            style={{ color: "var(--color-primary-light)" }}
+          >
+            Ver proyecto
+          </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+            style={{ color: "var(--color-primary-light)" }}>
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
       </div>
     </motion.div>
   );
