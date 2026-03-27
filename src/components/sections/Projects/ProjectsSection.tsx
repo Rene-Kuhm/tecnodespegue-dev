@@ -81,100 +81,78 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -5 }}
-      className="group relative flex flex-col rounded-2xl overflow-hidden"
+      whileHover={{ y: -4 }}
+      className="group flex flex-col rounded-2xl p-5"
       style={{
         background: "var(--color-surface)",
-        border: "1px solid var(--color-border)",
-        minHeight: "260px",
+        borderTop: `3px solid ${accent}`,
+        borderRight: "1px solid var(--color-border)",
+        borderBottom: "1px solid var(--color-border)",
+        borderLeft: "1px solid var(--color-border)",
       }}
     >
-      {/* Accent bar top */}
-      <div className="h-1 w-full flex-shrink-0" style={{ background: `linear-gradient(90deg, ${accent}, ${accent}66)` }} />
-
-      {/* Glow hover */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${accent}0d 0%, transparent 70%)` }}
-      />
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
-        style={{ boxShadow: `inset 0 0 0 1px ${accent}22` }}
-      />
-
-      {/* Número decorativo */}
-      <span
-        className="absolute bottom-4 right-5 font-black pointer-events-none select-none"
-        style={{ color: accent, opacity: 0.06, fontSize: "5rem", lineHeight: 1 }}
-      >
-        {project.id}
-      </span>
-
-      {/* Contenido */}
-      <div className="relative z-10 flex flex-col flex-1 p-5">
-        {/* Header row */}
-        <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex flex-wrap gap-1.5 flex-1">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2.5 py-0.5 rounded-full font-medium"
-                style={{
-                  background: `${accent}14`,
-                  color: accent,
-                  border: `1px solid ${accent}25`,
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          {project.featured && (
+      {/* Tags + featured */}
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 3).map((tag) => (
             <span
-              className="text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0"
+              key={tag}
+              className="text-xs px-2.5 py-0.5 rounded-full font-medium"
               style={{
-                background: "rgba(124,111,255,0.15)",
-                color: "var(--color-primary-light)",
-                border: "1px solid rgba(124,111,255,0.25)",
+                background: `${accent}18`,
+                color: accent,
+                border: `1px solid ${accent}30`,
               }}
             >
-              ✦
+              {tag}
             </span>
-          )}
+          ))}
         </div>
-
-        {/* Título */}
-        <h3
-          className="font-bold mb-2 leading-snug"
-          style={{ color: "var(--color-text)", fontSize: "var(--font-size-base)" }}
-        >
-          {project.title}
-        </h3>
-
-        {/* Descripción */}
-        <p
-          className="leading-relaxed flex-1"
-          style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}
-        >
-          {project.description}
-        </p>
-
-        {/* CTA */}
-        {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-fit"
-            style={{ color: accent }}
+        {project.featured && (
+          <span
+            className="text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0"
+            style={{
+              background: "rgba(124,111,255,0.15)",
+              color: "var(--color-primary-light)",
+              border: "1px solid rgba(124,111,255,0.25)",
+            }}
           >
-            <span className="text-sm font-semibold">Ver en GitHub</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+            ✦ Destacado
+          </span>
         )}
       </div>
+
+      {/* Título */}
+      <h3
+        className="font-bold mb-2"
+        style={{ color: "var(--color-text)", fontSize: "var(--font-size-lg)" }}
+      >
+        {project.title}
+      </h3>
+
+      {/* Descripción */}
+      <p
+        className="leading-relaxed mb-4 flex-1"
+        style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}
+      >
+        {project.description}
+      </p>
+
+      {/* CTA */}
+      {project.url && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 w-fit text-sm font-semibold transition-opacity duration-200 opacity-60 group-hover:opacity-100"
+          style={{ color: accent }}
+        >
+          Ver en GitHub
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      )}
     </motion.div>
   );
 }
