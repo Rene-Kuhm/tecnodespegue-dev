@@ -91,7 +91,7 @@ export function ProcessSection() {
         {/* DESKTOP — stepper horizontal */}
         <div className="hidden lg:block">
           {/* Línea conectora */}
-          <div className="relative flex items-start justify-between gap-4 mb-0">
+          <div className="relative flex items-start justify-between gap-3 mb-0">
             {/* Línea de fondo que conecta los dots */}
             <div
               className="absolute top-5 left-[10%] right-[10%] h-px"

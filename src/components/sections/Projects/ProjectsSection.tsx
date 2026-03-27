@@ -91,8 +91,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -4 }}
-      className="group flex flex-col rounded-2xl overflow-hidden"
+      whileHover={{ y: -4, zIndex: 10 }}
+      className="group relative flex flex-col rounded-2xl overflow-hidden h-full"
       style={{ border: "1px solid var(--color-border)" }}
     >
       {/* Preview area — mockup visual */}

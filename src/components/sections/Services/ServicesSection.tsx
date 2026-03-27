@@ -65,8 +65,8 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6 }}
-      className="group relative flex flex-col rounded-2xl cursor-pointer"
+      whileHover={{ y: -6, zIndex: 10 }}
+      className="group relative flex flex-col rounded-2xl cursor-pointer overflow-hidden"
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",

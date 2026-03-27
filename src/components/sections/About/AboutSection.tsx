@@ -103,7 +103,7 @@ export function AboutSection() {
               </div>
 
               {/* Contenido código simulado */}
-              <div className="p-4 sm:p-6 font-mono leading-7 sm:leading-8" style={{ background: "var(--color-surface)", fontSize: "clamp(0.7rem, 2vw, 0.8rem)" }}>
+              <div className="p-4 sm:p-6 font-mono leading-7 sm:leading-8 overflow-x-auto" style={{ background: "var(--color-surface)", fontSize: "clamp(0.7rem, 2vw, 0.8rem)" }}>
                 <p><span style={{ color: "#c77dff" }}>const</span> <span style={{ color: "#00e5ff" }}>agency</span> <span style={{ color: "var(--color-text-muted)" }}>=</span> <span style={{ color: "#ffb347" }}>{"{"}</span></p>
                 <p className="pl-6"><span style={{ color: "#7c6fff" }}>nombre</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#6bcb77" }}>&quot;TecnoDespegue&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>
                 <p className="pl-6"><span style={{ color: "#7c6fff" }}>ubicacion</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#6bcb77" }}>&quot;Buenos Aires, AR&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>

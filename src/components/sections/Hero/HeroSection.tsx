@@ -155,17 +155,17 @@ export function HeroSection() {
             className="font-bold tracking-tight leading-[1.05] mb-6 w-full"
             style={{ fontSize: "var(--font-size-hero)" }}
           >
-            <span className="block overflow-hidden py-1">
+            <span className="block overflow-hidden py-2">
               <span ref={line1Ref} className="block">
                 {splitToChars("Creamos")}
               </span>
             </span>
-            <span className="block overflow-hidden py-1">
+            <span className="block overflow-hidden py-2">
               <span ref={line2Ref} className="block gradient-text">
                 Experiencias
               </span>
             </span>
-            <span className="block overflow-hidden py-1">
+            <span className="block overflow-hidden py-2">
               <span ref={line3Ref} className="block">
                 {splitToChars("Digitales")}
               </span>
