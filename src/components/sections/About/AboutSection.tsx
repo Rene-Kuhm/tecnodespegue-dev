@@ -103,36 +103,14 @@ export function AboutSection() {
               </div>
 
               {/* Contenido código simulado */}
-              <div className="p-6 font-mono text-sm leading-7" style={{ background: "var(--color-surface)" }}>
-                <div style={{ color: "var(--color-text-faint)" }}>
-                  <span style={{ color: "#c77dff" }}>const</span>{" "}
-                  <span style={{ color: "#00e5ff" }}>agency</span>{" "}
-                  <span style={{ color: "var(--color-text-muted)" }}>=</span>{" "}
-                  <span style={{ color: "#ffb347" }}>{"{"}</span>
-                </div>
-                <div className="pl-5">
-                  <span style={{ color: "#7c6fff" }}>nombre</span>
-                  <span style={{ color: "var(--color-text-muted)" }}>: </span>
-                  <span style={{ color: "#6bcb77" }}>&quot;TecnoDespegue&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span>
-                </div>
-                <div className="pl-5">
-                  <span style={{ color: "#7c6fff" }}>ubicacion</span>
-                  <span style={{ color: "var(--color-text-muted)" }}>: </span>
-                  <span style={{ color: "#6bcb77" }}>&quot;Buenos Aires, AR&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span>
-                </div>
-                <div className="pl-5">
-                  <span style={{ color: "#7c6fff" }}>proyectos</span>
-                  <span style={{ color: "var(--color-text-muted)" }}>: </span>
-                  <span style={{ color: "#ff6b9d" }}>50</span><span style={{ color: "var(--color-text-muted)" }}>,</span>
-                </div>
-                <div className="pl-5">
-                  <span style={{ color: "#7c6fff" }}>disponible</span>
-                  <span style={{ color: "var(--color-text-muted)" }}>: </span>
-                  <span style={{ color: "#6bcb77" }}>true</span><span style={{ color: "var(--color-text-muted)" }}>,</span>
-                </div>
-                <div className="pl-5">
-                  <span style={{ color: "#7c6fff" }}>stack</span>
-                  <span style={{ color: "var(--color-text-muted)" }}>: </span>
+              <div className="p-6 font-mono leading-8 overflow-x-auto" style={{ background: "var(--color-surface)", fontSize: "0.8rem" }}>
+                <p><span style={{ color: "#c77dff" }}>const</span> <span style={{ color: "#00e5ff" }}>agency</span> <span style={{ color: "var(--color-text-muted)" }}>=</span> <span style={{ color: "#ffb347" }}>{"{"}</span></p>
+                <p className="pl-6"><span style={{ color: "#7c6fff" }}>nombre</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#6bcb77" }}>&quot;TecnoDespegue&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>
+                <p className="pl-6"><span style={{ color: "#7c6fff" }}>ubicacion</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#6bcb77" }}>&quot;Buenos Aires, AR&quot;</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>
+                <p className="pl-6"><span style={{ color: "#7c6fff" }}>proyectos</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#ff6b9d" }}>50</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>
+                <p className="pl-6"><span style={{ color: "#7c6fff" }}>disponible</span><span style={{ color: "var(--color-text-muted)" }}>:</span> <span style={{ color: "#6bcb77" }}>true</span><span style={{ color: "var(--color-text-muted)" }}>,</span></p>
+                <p className="pl-6">
+                  <span style={{ color: "#7c6fff" }}>stack</span><span style={{ color: "var(--color-text-muted)" }}>:</span>{" "}
                   <span style={{ color: "#ffb347" }}>[</span>
                   <span style={{ color: "#6bcb77" }}>&quot;Next.js&quot;</span>
                   <span style={{ color: "var(--color-text-muted)" }}>, </span>
@@ -140,12 +118,10 @@ export function AboutSection() {
                   <span style={{ color: "var(--color-text-muted)" }}>, </span>
                   <span style={{ color: "#6bcb77" }}>&quot;Node.js&quot;</span>
                   <span style={{ color: "#ffb347" }}>]</span>
-                </div>
-                <div style={{ color: "#ffb347" }}>{"}"}</div>
-                <div className="mt-2">
-                  <span style={{ color: "var(--color-text-faint)" }}>// </span>
-                  <span style={{ color: "var(--color-text-faint)" }}>listos para tu próximo proyecto 🚀</span>
-                </div>
+                  <span style={{ color: "var(--color-text-muted)" }}>,</span>
+                </p>
+                <p><span style={{ color: "#ffb347" }}>{"}"}</span></p>
+                <p className="mt-2" style={{ color: "rgba(240,240,245,0.25)" }}>{"// listos para tu próximo proyecto 🚀"}</p>
               </div>
             </motion.div>
 
@@ -156,19 +132,12 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="flex items-center gap-3 p-4 rounded-xl"
+                className="flex flex-col gap-1 p-4 rounded-xl"
                 style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
               >
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center font-black flex-shrink-0"
-                  style={{ background: "rgba(124,111,255,0.15)", color: "var(--color-primary-light)", fontSize: "1.1rem" }}
-                >
-                  50+
-                </div>
-                <div>
-                  <div className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>Proyectos</div>
-                  <div className="text-xs" style={{ color: "var(--color-text-faint)" }}>completados</div>
-                </div>
+                <span className="font-black gradient-text" style={{ fontSize: "var(--font-size-2xl)", lineHeight: 1 }}>50+</span>
+                <span className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>Proyectos</span>
+                <span className="text-xs" style={{ color: "var(--color-text-faint)" }}>completados</span>
               </motion.div>
 
               <motion.div
@@ -176,17 +145,15 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="flex items-center gap-3 p-4 rounded-xl"
+                className="flex flex-col gap-1 p-4 rounded-xl"
                 style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
               >
-                <div
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0 animate-pulse-glow"
-                  style={{ background: "#6bcb77" }}
-                />
-                <div>
-                  <div className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>Disponibles</div>
-                  <div className="text-xs" style={{ color: "var(--color-text-faint)" }}>para nuevos proyectos</div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <div className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse-glow" style={{ background: "#6bcb77" }} />
+                  <span className="text-xs font-semibold" style={{ color: "#6bcb77" }}>Online</span>
                 </div>
+                <span className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>Disponibles</span>
+                <span className="text-xs" style={{ color: "var(--color-text-faint)" }}>para nuevos proyectos</span>
               </motion.div>
             </div>
 
