@@ -52,12 +52,11 @@ export function HeroSection() {
         );
       }
 
-      // Line 2 chars (gradient)
-      const chars2 = line2Ref.current?.querySelectorAll(".char");
-      if (chars2) {
-        tl.fromTo(chars2,
-          { y: "120%", opacity: 0 },
-          { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.025 },
+      // Line 2 — animar el span completo (gradient-text no funciona con chars split)
+      if (line2Ref.current) {
+        tl.fromTo(line2Ref.current,
+          { y: "110%", opacity: 0 },
+          { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" },
           "-=0.55"
         );
       }
@@ -163,7 +162,7 @@ export function HeroSection() {
             </span>
             <span className="block overflow-hidden py-1">
               <span ref={line2Ref} className="block gradient-text">
-                {splitToChars("Experiencias")}
+                Experiencias
               </span>
             </span>
             <span className="block overflow-hidden py-1">

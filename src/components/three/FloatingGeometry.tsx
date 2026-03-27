@@ -46,28 +46,32 @@ export function FloatingGeometry() {
 
       {/* Torus secundario */}
       <Float speed={1.5} rotationIntensity={1} floatIntensity={1}>
-        <mesh ref={mesh2Ref} position={[3.5, 2, -1]}>
-          <torusGeometry args={[0.6, 0.2, 16, 100]} />
+        <mesh ref={mesh2Ref} position={[3, 1.5, -3]}>
+          <torusGeometry args={[0.55, 0.18, 16, 100]} />
           <meshStandardMaterial
             color="#00d4ff"
             emissive="#00a8cc"
             emissiveIntensity={0.4}
             metalness={0.9}
             roughness={0.1}
+            transparent
+            opacity={0.8}
           />
         </mesh>
       </Float>
 
       {/* Octaedro decorativo */}
       <Float speed={3} rotationIntensity={2} floatIntensity={0.5}>
-        <mesh position={[-4, -1.5, -1]}>
-          <octahedronGeometry args={[0.5]} />
+        <mesh position={[-3.5, -2, -2]}>
+          <octahedronGeometry args={[0.4]} />
           <meshStandardMaterial
             color="#ff6b6b"
             emissive="#cc3333"
             emissiveIntensity={0.3}
             metalness={0.7}
             roughness={0.3}
+            transparent
+            opacity={0.75}
           />
         </mesh>
       </Float>
