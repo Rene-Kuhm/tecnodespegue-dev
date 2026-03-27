@@ -186,21 +186,21 @@ export function TestimonialsSection() {
                 key={tm.id}
                 onClick={() => setActive(i)}
                 whileHover={{ y: -2 }}
-                className="p-2.5 rounded-xl text-left transition-all duration-300 w-full min-w-0"
+                className="p-3 rounded-xl text-left transition-all duration-300 w-full min-w-0"
                 style={{
                   background: i === active ? "var(--color-surface-hover)" : "var(--color-surface)",
                   border: `1px solid ${i === active ? tm.color + "40" : "var(--color-border)"}`,
                   boxShadow: i === active ? `0 4px 16px ${tm.color}18` : "none",
                 }}
               >
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                    style={{ background: tm.color, fontSize: "0.6rem" }}>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                    style={{ background: tm.color, fontSize: "0.65rem" }}>
                     {tm.avatar}
                   </div>
-                  <div className="text-xs font-semibold text-white truncate leading-tight">{tm.name.split(" ")[0]}</div>
+                  <div className="text-sm font-semibold text-white truncate leading-tight">{tm.name.split(" ")[0]}</div>
                 </div>
-                <div className="text-xs truncate" style={{ color: "var(--color-text-faint)", fontSize: "0.65rem" }}>{tm.company}</div>
+                <div className="text-xs truncate" style={{ color: "var(--color-text-muted)" }}>{tm.company}</div>
               </motion.button>
             ))}
           </div>

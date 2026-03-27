@@ -24,7 +24,7 @@
   /* Text */
   --color-text: #f0f0f5;
   --color-text-muted: rgba(240, 240, 245, 0.5);
-  --color-text-faint: rgba(240, 240, 245, 0.2);
+  --color-text-faint: rgba(240, 240, 245, 0.35);
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #7c6fff 0%, #00e5ff 100%);

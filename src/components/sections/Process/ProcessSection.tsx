@@ -145,7 +145,7 @@ export function ProcessSection() {
                     {step.duration}
                   </span>
 
-                  <p className="text-xs leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+                  <p className="leading-relaxed" style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-xs)" }}>
                     {step.description}
                   </p>
                 </motion.div>

@@ -104,7 +104,7 @@ export function ContactSection() {
                       {info.icon}
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs uppercase tracking-wide mb-0.5" style={{ color: "var(--color-text-faint)", fontSize: "0.65rem" }}>{info.label}</div>
+                      <div className="text-xs uppercase tracking-wide mb-0.5" style={{ color: "var(--color-text-faint)" }}>{info.label}</div>
                       <div className="text-sm font-medium transition-colors duration-200 group-hover:text-white truncate"
                         style={{ color: "var(--color-text-muted)" }}>{info.value}</div>
                     </div>

@@ -66,11 +66,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6 }}
-      className="group relative flex flex-col rounded-2xl cursor-pointer shimmer"
+      className="group relative flex flex-col rounded-2xl cursor-pointer"
       style={{
         background: "var(--color-surface)",
         border: "1px solid var(--color-border)",
-        overflow: "hidden",
         padding: "1.5rem",
         minHeight: "280px",
       }}
@@ -121,33 +120,21 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         {service.description}
       </p>
 
-      {/* Tags en la misma fila que el arrow */}
-      <div className="flex items-center justify-between gap-2 mt-auto">
-        <div className="flex flex-wrap gap-1.5">
-          {service.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2.5 py-1 rounded-full font-medium"
-              style={{
-                background: `${service.color}12`,
-                color: service.color,
-                border: `1px solid ${service.color}20`,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <motion.div
-          className="w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 flex-shrink-0 transition-opacity duration-300"
-          style={{ background: `${service.color}20`, color: service.color }}
-          whileHover={{ x: 2 }}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </motion.div>
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5 mt-auto">
+        {service.tags.map((tag) => (
+          <span
+            key={tag}
+            className="text-xs px-2.5 py-1 rounded-full font-medium"
+            style={{
+              background: `${service.color}12`,
+              color: service.color,
+              border: `1px solid ${service.color}20`,
+            }}
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </motion.div>
   );
