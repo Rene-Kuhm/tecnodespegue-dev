@@ -56,8 +56,8 @@ export function HeroSection() {
       const chars2 = line2Ref.current?.querySelectorAll(".char");
       if (chars2) {
         tl.fromTo(chars2,
-          { y: "120%", opacity: 0, rotateX: -60 },
-          { y: "0%", opacity: 1, rotateX: 0, duration: 0.8, ease: "power3.out", stagger: 0.025 },
+          { y: "120%", opacity: 0 },
+          { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.025 },
           "-=0.55"
         );
       }
@@ -154,7 +154,7 @@ export function HeroSection() {
           {/* Heading — chars animados */}
           <h1
             className="font-bold tracking-tight leading-[1.05] mb-6 w-full"
-            style={{ fontSize: "var(--font-size-hero)", perspective: "1000px" }}
+            style={{ fontSize: "var(--font-size-hero)" }}
           >
             <span className="block overflow-hidden py-1">
               <span ref={line1Ref} className="block">

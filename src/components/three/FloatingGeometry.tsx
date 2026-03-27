@@ -25,10 +25,10 @@ export function FloatingGeometry() {
 
   return (
     <>
-      {/* Esfera principal distorsionada */}
+      {/* Esfera principal distorsionada — desplazada a la derecha para no tapar el texto */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={1.5}>
-        <mesh ref={meshRef} position={[0, 0, 0]}>
-          <icosahedronGeometry args={[1.8, 4]} />
+        <mesh ref={meshRef} position={[4, 0.5, -2]}>
+          <icosahedronGeometry args={[1.2, 4]} />
           <MeshDistortMaterial
             color="#6c63ff"
             emissive="#3d37cc"
@@ -38,7 +38,7 @@ export function FloatingGeometry() {
             distort={0.4}
             speed={2}
             transparent
-            opacity={0.85}
+            opacity={0.5}
             wireframe={false}
           />
         </mesh>
@@ -46,7 +46,7 @@ export function FloatingGeometry() {
 
       {/* Torus secundario */}
       <Float speed={1.5} rotationIntensity={1} floatIntensity={1}>
-        <mesh ref={mesh2Ref} position={[3, 1, -2]}>
+        <mesh ref={mesh2Ref} position={[3.5, 2, -1]}>
           <torusGeometry args={[0.6, 0.2, 16, 100]} />
           <meshStandardMaterial
             color="#00d4ff"
@@ -60,7 +60,7 @@ export function FloatingGeometry() {
 
       {/* Octaedro decorativo */}
       <Float speed={3} rotationIntensity={2} floatIntensity={0.5}>
-        <mesh position={[-3.5, -1, -1]}>
+        <mesh position={[-4, -1.5, -1]}>
           <octahedronGeometry args={[0.5]} />
           <meshStandardMaterial
             color="#ff6b6b"
