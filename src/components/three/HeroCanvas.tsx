@@ -18,8 +18,13 @@ const FloatingGeometry = dynamic(
   { ssr: false }
 );
 
-const subscribe = () => () => {};
-const getIsMobile = () => window.innerWidth < 768;
+const Effects = dynamic(
+  () => import("./Effects").then((mod) => ({ default: mod.Effects })),
+  { ssr: false }
+);
+
+const subscribe       = () => () => {};
+const getIsMobile     = () => window.innerWidth < 768;
 const getIsMobileServer = () => false;
 
 export function HeroCanvas() {
@@ -34,11 +39,14 @@ export function HeroCanvas() {
             antialias: !isMobile,
             alpha: true,
             powerPreference: "high-performance",
+            toneMapping: 3, // ACESFilmicToneMapping
+            toneMappingExposure: 1.2,
           }}
           dpr={[1, isMobile ? 1 : 1.5]}
         >
-          <ParticleField count={isMobile ? 600 : 1800} />
+          <ParticleField count={isMobile ? 700 : 2000} />
           <FloatingGeometry />
+          {!isMobile && <Effects />}
         </Canvas>
       </Suspense>
     </div>

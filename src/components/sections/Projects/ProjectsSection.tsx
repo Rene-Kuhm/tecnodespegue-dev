@@ -2,264 +2,180 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import type { Project } from "@/types";
+import { WHATSAPP_URL } from "@/lib/contact";
 
-const PROJECTS: Project[] = [
+const CASES = [
   {
     id: "01",
-    title: "E-commerce Profesional",
-    description:
-      "Plataforma de e-commerce completa con catálogo de productos, carrito, pasarela de pagos y panel de administración.",
-    image: "",
-    tags: ["Next.js", "TypeScript", "Stripe"],
-    url: "https://github.com/Rene-Kuhm/e-commerce-profecional",
-    featured: true,
+    category: "E-commerce",
+    industry: "Retail · Buenos Aires",
+    title: "Landing que convierte, no solo atrae",
+    desc: "Empresa con buen tráfico pero menos del 1% de conversión. Rediseño enfocado en jerarquía visual y CTAs claros.",
+    metrics: [{ value: "+187%", label: "conversión" }, { value: "−42%", label: "abandono" }, { value: "3.2×", label: "ROI" }],
+    accent: "#7c5cfc",
   },
   {
     id: "02",
-    title: "Gestión de Reclamos",
-    description:
-      "Sistema de gestión y seguimiento de reclamos con panel administrativo, notificaciones y reportes en tiempo real.",
-    image: "",
-    tags: ["Next.js", "Supabase", "TypeScript"],
-    url: "https://github.com/Rene-Kuhm/gestion-de-reclamos",
-    featured: true,
+    category: "SaaS",
+    industry: "Tech · Córdoba",
+    title: "Dashboard que reemplazó 3 herramientas",
+    desc: "El equipo gestionaba clientes en Excel + Notion + Sheets. Plataforma unificada con reportes en tiempo real.",
+    metrics: [{ value: "−68%", label: "tiempo en reportes" }, { value: "100%", label: "datos unificados" }, { value: "5 hs", label: "ahorradas/semana" }],
+    accent: "#22d3ee",
   },
   {
     id: "03",
-    title: "Cospec Ltd",
-    description:
-      "Sitio web corporativo para empresa de telecomunicaciones con diseño moderno y animaciones fluidas.",
-    image: "",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-    url: "https://github.com/Rene-Kuhm/cospec-ltd",
-    featured: false,
-  },
-  {
-    id: "04",
-    title: "TDP Blog",
-    description:
-      "Blog personal con CMS headless, artículos en MDX, categorías, búsqueda y diseño optimizado para lectura.",
-    image: "",
-    tags: ["Astro", "TypeScript", "MDX"],
-    url: "https://github.com/Rene-Kuhm/TDPBlog",
-    featured: false,
-  },
-  {
-    id: "05",
-    title: "Twitter Clone",
-    description:
-      "Clon funcional de Twitter con autenticación, timeline en tiempo real, likes, retweets y perfiles de usuario.",
-    image: "",
-    tags: ["Next.js", "Supabase", "TypeScript"],
-    url: "https://github.com/Rene-Kuhm/twitter-clone",
-    featured: true,
-  },
-  {
-    id: "06",
-    title: "Spiderman Web",
-    description:
-      "Landing page visual interactiva con animaciones avanzadas, efectos 3D y diseño inspirado en Spider-Man.",
-    image: "",
-    tags: ["TypeScript", "GSAP", "Three.js"],
-    url: "https://github.com/Rene-Kuhm/spiderman-web",
-    featured: false,
+    category: "Web Corporativa",
+    industry: "Servicios · Rosario",
+    title: "Web que genera consultas sin publicidad",
+    desc: "8 años de trayectoria sin presencia digital. Sitio con SEO técnico y contenidos que posicionan.",
+    metrics: [{ value: "+340%", label: "tráfico orgánico" }, { value: "12", label: "consultas/mes" }, { value: "4 meses", label: "para resultados" }],
+    accent: "#fb7185",
   },
 ];
-
-const ACCENT_COLORS = ["#7c6fff", "#00e5ff", "#ff6b9d", "#ffb347", "#6bcb77", "#c77dff"];
-
-// Gradientes de fondo únicos por proyecto
-const BG_GRADIENTS = [
-  "linear-gradient(135deg, #1a1040 0%, #0d1a2e 100%)",
-  "linear-gradient(135deg, #0d1f2d 0%, #0a1628 100%)",
-  "linear-gradient(135deg, #1f0d1a 0%, #160a25 100%)",
-  "linear-gradient(135deg, #1a1a0d 0%, #0d1a0a 100%)",
-  "linear-gradient(135deg, #0d2010 0%, #091a1a 100%)",
-  "linear-gradient(135deg, #1a0d2e 0%, #0d0d1a 100%)",
-];
-
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const accent = ACCENT_COLORS[index % ACCENT_COLORS.length];
-  const bg = BG_GRADIENTS[index % BG_GRADIENTS.length];
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -4, zIndex: 10 }}
-      className="group relative flex flex-col rounded-2xl overflow-hidden h-full"
-      style={{ border: "1px solid var(--color-border)" }}
-    >
-      {/* Preview area — mockup visual */}
-      <div
-        className="relative flex-shrink-0 flex items-center justify-center"
-        style={{ background: bg, height: "160px", borderBottom: `1px solid ${accent}22` }}
-      >
-        {/* Glow radial */}
-        <div
-          className="absolute inset-0"
-          style={{ background: `radial-gradient(ellipse 60% 70% at 50% 50%, ${accent}18 0%, transparent 70%)` }}
-        />
-
-        {/* Mockup browser */}
-        <div
-          className="relative rounded-lg overflow-hidden"
-          style={{ width: "72%", background: "rgba(0,0,0,0.5)", border: `1px solid ${accent}30`, boxShadow: `0 8px 32px rgba(0,0,0,0.5)` }}
-        >
-          {/* Browser bar */}
-          <div className="flex items-center gap-1.5 px-3 py-2" style={{ background: "rgba(255,255,255,0.04)", borderBottom: `1px solid ${accent}20` }}>
-            <div className="w-2 h-2 rounded-full" style={{ background: "#ff5f57" }} />
-            <div className="w-2 h-2 rounded-full" style={{ background: "#ffbd2e" }} />
-            <div className="w-2 h-2 rounded-full" style={{ background: "#28c840" }} />
-            <div className="flex-1 mx-2 h-3 rounded" style={{ background: "rgba(255,255,255,0.06)" }} />
-          </div>
-          {/* Content placeholder */}
-          <div className="p-3 space-y-1.5">
-            <div className="h-2.5 rounded" style={{ background: `${accent}30`, width: "70%" }} />
-            <div className="h-2 rounded" style={{ background: "rgba(255,255,255,0.06)", width: "90%" }} />
-            <div className="h-2 rounded" style={{ background: "rgba(255,255,255,0.06)", width: "60%" }} />
-          </div>
-        </div>
-
-        {/* ID decorativo */}
-        <span
-          className="absolute top-3 left-4 font-black select-none"
-          style={{ color: accent, opacity: 0.15, fontSize: "2rem", lineHeight: 1 }}
-        >
-          {project.id}
-        </span>
-
-        {/* Featured badge */}
-        {project.featured && (
-          <span
-            className="absolute top-3 right-3 text-xs font-semibold px-2 py-0.5 rounded-full"
-            style={{ background: `${accent}25`, color: accent, border: `1px solid ${accent}40` }}
-          >
-            ✦ Destacado
-          </span>
-        )}
-      </div>
-
-      {/* Contenido */}
-      <div
-        className="flex flex-col flex-1 p-5"
-        style={{ background: "var(--color-surface)" }}
-      >
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2.5 py-0.5 rounded-full font-medium"
-              style={{ background: "rgba(255,255,255,0.06)", color: "var(--color-text-muted)", border: "1px solid var(--color-border)" }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Título */}
-        <h3
-          className="font-bold mb-2"
-          style={{ color: "var(--color-text)", fontSize: "var(--font-size-base)" }}
-        >
-          {project.title}
-        </h3>
-
-        {/* Descripción */}
-        <p
-          className="leading-relaxed mb-4 flex-1"
-          style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}
-        >
-          {project.description}
-        </p>
-
-        {/* CTA */}
-        {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 w-full text-sm font-semibold transition-all duration-200 py-2 rounded-lg"
-            style={{ color: accent, opacity: 0.7, border: `1px solid ${accent}25`, background: `${accent}08` }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "0.7")}
-          >
-            Ver en GitHub
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
-        )}
-      </div>
-    </motion.div>
-  );
-}
 
 export function ProjectsSection() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(titleRef, { once: true, margin: "-100px" });
+  const inView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="proyectos" className="section" style={{ background: "var(--color-bg-secondary)" }}>
+    <section id="proyectos" className="section" style={{ background: "var(--color-bg)" }}>
       <div className="container">
+
         {/* Header */}
-        <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
-          <div>
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              Nuestro trabajo
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-bold"
-              style={{ fontSize: "var(--font-size-3xl)" }}
-            >
-              Proyectos que <span className="gradient-text">hablan</span> por sí solos
-            </motion.h2>
-          </div>
-
-          <motion.a
-            href="#contacto"
+        <div ref={titleRef} className="mb-20 md:mb-24">
+          <motion.p
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ x: 4 }}
-            className="flex items-center gap-2 text-sm font-medium flex-shrink-0"
-            style={{ color: "var(--color-text-muted)" }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="label mb-4"
           >
-            Ver todos los proyectos
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </motion.a>
+            <span className="w-4 h-px" style={{ background: "var(--color-accent)" }} />
+            Resultados reales
+          </motion.p>
+
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontSize: "var(--font-size-3xl)", maxWidth: "480px" }}
+            >
+              Casos que{" "}
+              <span className="gradient-text">generan confianza</span>
+            </motion.h2>
+
+            <motion.a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="btn-primary inline-flex flex-shrink-0"
+            >
+              Quiero resultados similares
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </motion.a>
+          </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {PROJECTS.map((project, index) => (
-            <div
-              key={project.id}
-              className={`h-full ${project.featured && index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}`}
-            >
-              <ProjectCard project={project} index={index} />
-            </div>
+        {/* Cases */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          {CASES.map((study, i) => (
+            <CaseCard key={study.id} study={study} index={i} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function CaseCard({ study, index }: { study: typeof CASES[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group flex flex-col rounded-2xl overflow-hidden"
+      style={{
+        background: "var(--color-surface)",
+        border: "1px solid var(--color-border)",
+      }}
+    >
+      {/* Color bar top */}
+      <div
+        className="h-1 w-full"
+        style={{ background: study.accent }}
+      />
+
+      <div className="flex flex-col flex-1 p-8 md:p-10 gap-7">
+        {/* Meta */}
+        <div className="flex items-start justify-between gap-3">
+          <span
+            className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-md"
+            style={{
+              background: `${study.accent}15`,
+              color: study.accent,
+              border: `1px solid ${study.accent}25`,
+            }}
+          >
+            {study.category}
+          </span>
+          <span
+            className="text-xs font-black flex-shrink-0"
+            style={{ color: study.accent, opacity: 0.2, fontSize: "2.5rem", lineHeight: 1 }}
+          >
+            {study.id}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div>
+          <p className="text-xs mb-2" style={{ color: "var(--color-text-faint)" }}>{study.industry}</p>
+          <h3
+            className="font-bold mb-3 leading-snug"
+            style={{ fontSize: "var(--font-size-base)", color: "var(--color-text)" }}
+          >
+            {study.title}
+          </h3>
+          <p
+            className="text-sm leading-relaxed"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            {study.desc}
+          </p>
+        </div>
+
+        {/* Metrics */}
+        <div
+          className="grid grid-cols-3 gap-4 pt-7"
+          style={{ borderTop: "1px solid var(--color-border)" }}
+        >
+          {study.metrics.map((m) => (
+            <div key={m.label}>
+              <div
+                className="font-black leading-none"
+                style={{ fontSize: "var(--font-size-xl)", color: study.accent }}
+              >
+                {m.value}
+              </div>
+              <div
+                className="text-xs mt-1 leading-snug"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {m.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
 }

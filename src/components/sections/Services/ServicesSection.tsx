@@ -2,191 +2,188 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import type { Service } from "@/types";
 
-const SERVICES: Service[] = [
+const SERVICES = [
   {
-    id: "web",
-    icon: "🌐",
+    num: "01",
     title: "Desarrollo Web",
-    description: "Webs y aplicaciones de alto rendimiento con Next.js, React y TypeScript. Arquitecturas escalables que crecen con tu negocio.",
-    tags: ["Next.js", "React", "TypeScript", "Performance"],
-    color: "#7c6fff",
+    desc: "Webs y aplicaciones rápidas, escalables y optimizadas para convertir. Next.js, React, TypeScript.",
+    tags: ["Next.js", "TypeScript", "Node.js"],
+    accent: "var(--color-primary-light)",
   },
   {
-    id: "mobile",
-    icon: "📱",
+    num: "02",
     title: "Apps Móviles",
-    description: "Aplicaciones nativas y multiplataforma con React Native. Experiencias fluidas, rápidas y nativas para iOS y Android.",
-    tags: ["React Native", "iOS", "Android", "Expo"],
-    color: "#00e5ff",
+    desc: "Aplicaciones nativas multiplataforma. Experiencia fluida en iOS y Android con React Native.",
+    tags: ["React Native", "iOS", "Android"],
+    accent: "var(--color-secondary)",
   },
   {
-    id: "consulting",
-    icon: "🧠",
-    title: "Consultoría IT",
-    description: "Asesoramiento estratégico en arquitectura, infraestructura cloud y transformación digital. Decisiones técnicas que importan.",
-    tags: ["Arquitectura", "Cloud", "DevOps", "Strategy"],
-    color: "#ff6b9d",
-  },
-  {
-    id: "design",
-    icon: "✨",
+    num: "03",
     title: "UI/UX Design",
-    description: "Sistemas de diseño, prototipos y experiencias centradas en el usuario que convierten visitantes en clientes.",
-    tags: ["Figma", "Design System", "UX Research", "Prototyping"],
-    color: "#ffb347",
+    desc: "Sistemas de diseño y prototipos centrados en el usuario que convierten visitas en clientes.",
+    tags: ["Figma", "Design System", "Prototipado"],
+    accent: "var(--color-accent)",
   },
   {
-    id: "ecommerce",
-    icon: "🛒",
+    num: "04",
     title: "E-commerce",
-    description: "Tiendas online optimizadas para convertir. Integración con MercadoPago, Stripe, gestión de inventario y logística.",
-    tags: ["Shopify", "WooCommerce", "Custom", "Payments"],
-    color: "#6bcb77",
+    desc: "Tiendas online optimizadas. Integración con MercadoPago, Stripe y gestión de inventario.",
+    tags: ["Custom", "Pagos", "Catálogo"],
+    accent: "var(--color-green)",
   },
   {
-    id: "automation",
-    icon: "⚡",
+    num: "05",
+    title: "Consultoría IT",
+    desc: "Estrategia técnica, arquitectura cloud y transformación digital para empresas que escalan.",
+    tags: ["Arquitectura", "Cloud", "Strategy"],
+    accent: "var(--color-primary-light)",
+  },
+  {
+    num: "06",
     title: "Automatización & AI",
-    description: "Integraciones inteligentes, bots y flujos de trabajo con IA que eliminan el trabajo repetitivo y maximizan eficiencia.",
-    tags: ["APIs", "AI", "Bots", "Integrations"],
-    color: "#c77dff",
+    desc: "Flujos de trabajo inteligentes, integraciones y bots que eliminan el trabajo repetitivo.",
+    tags: ["APIs", "IA", "Workflows"],
+    accent: "var(--color-secondary)",
   },
 ];
 
-function ServiceCard({ service, index }: { service: Service; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6, zIndex: 10 }}
-      className="group relative flex flex-col rounded-2xl cursor-pointer overflow-hidden"
-      style={{
-        background: "var(--color-surface)",
-        border: "1px solid var(--color-border)",
-        padding: "1.5rem",
-        minHeight: "280px",
-      }}
-    >
-      {/* Número decorativo de fondo */}
-      <span
-        className="absolute top-3 right-4 font-black pointer-events-none select-none"
-        style={{ color: service.color, opacity: 0.05, fontSize: "4.5rem", lineHeight: 1 }}
-      >
-        {String(index + 1).padStart(2, "0")}
-      </span>
-
-      {/* Glow hover */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse 70% 60% at 20% 50%, ${service.color}0d 0%, transparent 70%)` }}
-      />
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none rounded-2xl"
-        style={{ boxShadow: `inset 0 0 0 1px ${service.color}20` }}
-      />
-      <div
-        className="absolute top-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-all duration-500"
-        style={{ background: `linear-gradient(90deg, transparent, ${service.color}, transparent)` }}
-      />
-
-      {/* Icon */}
-      <div
-        className="relative w-11 h-11 rounded-xl flex items-center justify-center text-lg mb-4 flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
-        style={{ background: `${service.color}14`, border: `1px solid ${service.color}28` }}
-      >
-        {service.icon}
-      </div>
-
-      {/* Título */}
-      <h3
-        className="font-bold mb-2 leading-snug"
-        style={{ color: "var(--color-text)", fontSize: "var(--font-size-base)" }}
-      >
-        {service.title}
-      </h3>
-
-      {/* Descripción — crece para empujar tags al fondo */}
-      <p
-        className="leading-relaxed flex-1 mb-4"
-        style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}
-      >
-        {service.description}
-      </p>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1.5 mt-auto">
-        {service.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs px-2.5 py-1 rounded-full font-medium"
-            style={{
-              background: `${service.color}12`,
-              color: service.color,
-              border: `1px solid ${service.color}20`,
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
 export function ServicesSection() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(titleRef, { once: true, margin: "-100px" });
+  const isInView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
     <section id="servicios" className="section" style={{ background: "var(--color-bg)" }}>
-      <div className="section-divider absolute top-0 left-0 right-0" />
-
       <div className="container">
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-14">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="chip glass mb-5"
-            style={{ color: "var(--color-primary-light)" }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--color-primary)" }} />
-            Lo que hacemos
-          </motion.span>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-bold mb-4"
-            style={{ fontSize: "var(--font-size-3xl)" }}
-          >
-            Servicios que <span className="gradient-text">impulsan</span> tu negocio
-          </motion.h2>
-
+        {/* Header */}
+        <div ref={titleRef} className="mb-20 md:mb-24">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-base)" }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="label mb-4"
           >
-            Soluciones tecnológicas completas para empresas que quieren liderar en el mundo digital.
+            <span className="w-4 h-px" style={{ background: "var(--color-primary)" }} />
+            Lo que hacemos
           </motion.p>
+
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontSize: "var(--font-size-3xl)", maxWidth: "520px" }}
+            >
+              Servicios que{" "}
+              <span className="gradient-text">impulsan</span>{" "}
+              tu negocio
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{
+                color: "var(--color-text-muted)",
+                fontSize: "var(--font-size-sm)",
+                maxWidth: "300px",
+                lineHeight: 1.8,
+              }}
+            >
+              Soluciones tecnológicas completas.<br />
+              De la idea al producto en producción.
+            </motion.p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Service rows */}
+        <div
+          style={{ borderTop: "1px solid var(--color-border)" }}
+        >
           {SERVICES.map((s, i) => (
-            <ServiceCard key={s.id} service={s} index={i} />
+            <ServiceRow key={s.num} service={s} index={i} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceRow({ service, index }: { service: typeof SERVICES[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      className="group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 py-9 md:py-11 cursor-default transition-colors duration-300"
+      style={{
+        borderBottom: "1px solid var(--color-border)",
+      }}
+    >
+      {/* Number */}
+      <span
+        className="flex-shrink-0 font-black transition-colors duration-300"
+        style={{
+          color: "var(--color-text-faint)",
+          fontSize: "var(--font-size-sm)",
+          letterSpacing: "0.05em",
+          width: "2.5rem",
+        }}
+      >
+        {service.num}
+      </span>
+
+      {/* Title */}
+      <h3
+        className="font-bold transition-colors duration-300 group-hover:text-white flex-shrink-0"
+        style={{
+          fontSize: "var(--font-size-lg)",
+          color: "var(--color-text)",
+          minWidth: "200px",
+        }}
+      >
+        {service.title}
+      </h3>
+
+      {/* Desc */}
+      <p
+        className="flex-1 transition-colors duration-300"
+        style={{
+          color: "var(--color-text-muted)",
+          fontSize: "var(--font-size-sm)",
+          lineHeight: 1.7,
+        }}
+      >
+        {service.desc}
+      </p>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 flex-shrink-0 sm:justify-end">
+        {service.tags.map((t) => (
+          <span
+            key={t}
+            className="text-xs px-2.5 py-1 rounded-md font-medium"
+            style={{
+              background: "var(--color-surface-2)",
+              color: "var(--color-text-muted)",
+              border: "1px solid var(--color-border)",
+            }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Accent line */}
+      <div
+        className="hidden sm:block flex-shrink-0 w-px h-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: service.accent }}
+      />
+    </motion.div>
   );
 }

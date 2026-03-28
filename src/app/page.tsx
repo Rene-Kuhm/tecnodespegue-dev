@@ -1,12 +1,15 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/Hero/HeroSection";
-import { ServicesSection } from "@/components/sections/Services/ServicesSection";
+import { LogosStrip } from "@/components/sections/LogosStrip/LogosStrip";
+import { PackagesSection } from "@/components/sections/Packages/PackagesSection";
 import { ProjectsSection } from "@/components/sections/Projects/ProjectsSection";
 import { ProcessSection } from "@/components/sections/Process/ProcessSection";
 import { AboutSection } from "@/components/sections/About/AboutSection";
 import { TestimonialsSection } from "@/components/sections/Testimonials/TestimonialsSection";
+import { FAQSection } from "@/components/sections/FAQ/FAQSection";
 import { ContactSection } from "@/components/sections/Contact/ContactSection";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp/FloatingWhatsApp";
 
 export default function HomePage() {
   return (
@@ -21,14 +24,17 @@ export default function HomePage() {
       <Header />
       <main id="main-content">
         <HeroSection />
-        <ServicesSection />
+        <LogosStrip />
+        <PackagesSection />
         <ProjectsSection />
         <ProcessSection />
         <AboutSection />
         <TestimonialsSection />
+        <FAQSection />
         <ContactSection />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

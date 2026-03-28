@@ -25,13 +25,6 @@ export function Header() {
     const header = headerRef.current;
     if (!header) return;
 
-    // Entrada inicial
-    gsap.fromTo(
-      header,
-      { y: -80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
-    );
-
     // Scroll state
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -68,15 +61,12 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 right-0 z-50 opacity-0"
+      className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: scrolled
-          ? "rgba(8, 8, 8, 0.85)"
-          : "transparent",
+        animation: "header-enter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both",
+        background: scrolled ? "rgba(8, 8, 8, 0.85)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled
-          ? "1px solid rgba(255,255,255,0.06)"
-          : "none",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
         transition: "background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease",
       }}
     >
