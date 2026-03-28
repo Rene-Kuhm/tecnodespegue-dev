@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/Hero/HeroSection";
 import { LogosStrip } from "@/components/sections/LogosStrip/LogosStrip";
+import { ServicesSection } from "@/components/sections/Services/ServicesSection";
 import { PackagesSection } from "@/components/sections/Packages/PackagesSection";
 import { ProjectsSection } from "@/components/sections/Projects/ProjectsSection";
 import { ProcessSection } from "@/components/sections/Process/ProcessSection";
@@ -25,6 +26,7 @@ export default function HomePage() {
       <main id="main-content">
         <HeroSection />
         <LogosStrip />
+        <ServicesSection />
         <PackagesSection />
         <ProjectsSection />
         <ProcessSection />
